@@ -4,6 +4,8 @@
 
 @section('breadcrumb', 'Home')
 
+@section('title-content', 'Dashboard')
+
 @section('content')
     <div class="kt-pagebody">
         <div class="row row-sm">

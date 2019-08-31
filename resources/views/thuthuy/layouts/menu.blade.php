@@ -12,12 +12,11 @@
 
     <li class="nav-item">
         <a href="" class="nav-link with-sub">
-        <i class="ionicons ion-ios-albums-outline"></i>
-        <span>Sản phẩm</span>
+            <i class="ionicons ion-ios-albums-outline"></i>
+            <span>Sản phẩm</span>
         </a>
         <ul class="nav-sub">
-        <li class="nav-item"><a href="table-basic.html" class="nav-link">Basic Table</a></li>
-        <li class="nav-item"><a href="table-datatable.html" class="nav-link">Data Table</a></li>
+            <li class="nav-item"><a href="{{ route('products.index') }}" class="nav-link">Danh sách sản phẩm</a></li>
         </ul>
     </li><!-- nav-item -->
 

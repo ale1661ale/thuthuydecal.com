@@ -17,3 +17,4 @@ Route::get('/', function () {
 Route::get('/thuthuy', function () {
     return view('thuthuy.pages.index');
 });
+Route::resource('products', 'ProductController');

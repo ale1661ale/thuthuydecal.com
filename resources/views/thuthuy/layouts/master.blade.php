@@ -54,7 +54,7 @@
     <!-- ##### MAIN PANEL ##### -->
     <div class="kt-mainpanel">
       <div class="kt-pagetitle">
-        <h5>Dashboard</h5>
+        <h5>@yield('title-content')</h5>
       </div><!-- kt-pagetitle -->
 
       @yield('content')
