@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAlesTable extends Migration
+class AddColToAles extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateAlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ale', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::table('ales', function (Blueprint $table) {
             $table->string('title');
             $table->string('key_name');
             $table->string('description');
             $table->text('content');
             $table->string('image');
             $table->integer('status')->default(1);
-            $table->timestamps();
         });
     }
 
