@@ -24,26 +24,26 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            @foreach($product as $key => $value)
-            <td>{{ $key+1 }}</td>
-            <td>{{ $value->name }}</td>
-            <td>
-                <img src="img/upload/products/{{ $value->image }}" alt="{{ $value->name }}">
-            </td>
-            <td>{{ $value->category->name }}</td>
-            <td>
-                @if($value->status == 1)
-                    "Hiện"
-                @else
-                    "Ẩn"
-                @endif
-            </td>
-            <td>
-                <button class="btn btn-danger">Xoá</button>
-            </td>
-            @endforeach
-        </tr>
+        @foreach($product as $key => $value)
+            <tr>
+                <td>{{ $key+1 }}</td>
+                <td>{{ $value->name }}</td>
+                <td>
+                    <img src="img/upload/products/{{ $value->image }}" alt="{{ $value->name }}">
+                </td>
+                <td>{{ $value->Category->name }}</td>
+                <td>
+                    @if($value->status == 1)
+                        Hiện
+                    @else
+                        Ẩn
+                    @endif
+                </td>
+                <td>
+                    <button class="btn btn-danger">Xoá</button>
+                </td>
+            </tr>
+        @endforeach
         </tbody>
     </table>
     </div><!-- table-wrapper -->

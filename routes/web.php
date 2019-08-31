@@ -14,7 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/thuthuy', function () {
-    return view('thuthuy.pages.index');
+Route::group(['prefix' => 'thuthuy'], function(){
+    Route::view('/','thuthuy.pages.index');
+
+    Route::resource('categories', 'CategoryController');
+
+    Route::resource('product_types', 'ProductTypeController');
+    
+    Route::resource('products', 'ProductController');
 });
-Route::resource('products', 'ProductController');
+

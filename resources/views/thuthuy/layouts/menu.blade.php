@@ -16,6 +16,8 @@
             <span>Sản phẩm</span>
         </a>
         <ul class="nav-sub">
+            <li class="nav-item"><a href="{{ route('categories.index') }}" class="nav-link">Danh mục</a></li>
+            <li class="nav-item"><a href="{{ route('product_types.index') }}" class="nav-link">Thể loại</a></li>
             <li class="nav-item"><a href="{{ route('products.index') }}" class="nav-link">Danh sách sản phẩm</a></li>
         </ul>
     </li><!-- nav-item -->

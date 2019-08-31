@@ -27,8 +27,8 @@
     <!-- Meta -->
     <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
     <meta name="author" content="ThemePixels">
-
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <base href="{{ asset('') }}">
     <title>Admin - @yield('title')</title>
 
     <!-- vendor css -->
@@ -56,6 +56,7 @@
       <div class="kt-pagetitle">
         <h5>@yield('title-content')</h5>
       </div><!-- kt-pagetitle -->
+      @include('flash_message')
 
       @yield('content')
       
@@ -68,12 +69,19 @@
     <script src="assets/thuthuy/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
     <script src="assets/thuthuy/lib/moment/moment.js"></script>
     <script src="assets/thuthuy/lib/d3/d3.js"></script>
-    <script src="assets/thuthuy/lib/rickshaw/rickshaw.min.js"></script>
     <script src="assets/thuthuy/lib/gmaps/gmaps.js"></script>
     <script src="assets/thuthuy/lib/chart.js/Chart.js"></script>
     <script src="assets/thuthuy/js/katniss.js"></script>
     <script src="assets/thuthuy/js/ResizeSensor.js"></script>
     <script src="assets/thuthuy/js/dashboard.js"></script>
-
+    <script src="assets/thuthuy/js/ajax.js"></script>
+    
+    <script>
+      setTimeout(function(){
+        $(".alert").fadeTo(2000, 500).slideUp(500, function(){
+          $(".alert").slideUp(500);
+        });
+        }); // 5 secs
+    </script>
   </body>
 </html>

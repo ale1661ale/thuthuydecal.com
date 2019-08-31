@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Validator;
+use Illuminate\Support\Str;
+use App\Http\Requests\CategoryRequest;
+use Session;
 
 class CategoryController extends Controller
 {
@@ -14,7 +18,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $category = Category::orderBy('id', 'desc')->get();
+
+        return view('thuthuy.pages.categories.index', compact('category'));
     }
 
     /**
@@ -24,7 +30,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('thuthuy.pages.categories.create');
     }
 
     /**
@@ -33,9 +39,14 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
+        $data = $request->all();
+        $data['slug'] = Str::slug($request->input('name'));
+
+        Category::create($data);
+
+        return redirect()->route('categories.index')->with('success', 'Thêm mới thành công danh mục '.$request->name);
     }
 
     /**
@@ -55,9 +66,11 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
-        //
+        $category = Category::find($id);
+
+        return response()->json($category, 200);
     }
 
     /**
@@ -67,9 +80,32 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(),
+            [
+                 'name' => 'required|min:2|max:255',
+            ],
+            [
+                'required' => 'Tên danh mục không được bỏ trống',
+                'min' => 'Tên danh mục quá ngắn',
+                'max' => 'Tên danh mục quá dài',
+            ]
+        );
+        if($validator->fails()){
+            return response()->json(['error' => 'true' ,'message' => $validator->errors()],200);
+        }
+        $category = Category::find($id);
+
+        $category->update([
+            'name' => $request->input('name'),
+            'slug' => Str::slug($request->input('name')),
+            'status' => $request->status,
+        ]);
+
+        Session::flash('success', 'Cập nhật thành công ');
+
+        return response()->json(200);
     }
 
     /**
