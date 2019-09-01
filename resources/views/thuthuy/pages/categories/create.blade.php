@@ -36,8 +36,9 @@
         </div>
         <!-- row -->
         <div class="form-layout-footer">
-            <button class="pure-button fuller-button blue">Tạo ngay</button>
-            <button class="pure-button fuller-button red">Huỷ</button>
+            <button type="submit" class="pure-button fuller-button blue">Tạo ngay</button>
+            <button type="submit" class="pure-button fuller-button blue">Tạo và thêm mới</button>
+            <button type="reset" class="pure-button fuller-button red">Huỷ</button>
         </div>
         <!-- form-layout-footer -->
         </form>

@@ -1,5 +1,5 @@
 @if ($message = Session::get('success'))
-<div class="alert alert-success alert-block">
+<div class="alert alert-success alert-block custom-flash">
 	<button type="button" class="close" data-dismiss="alert">×</button>	
         <strong>{{ $message }}</strong>
 </div>
@@ -7,7 +7,7 @@
 
 
 @if ($message = Session::get('error'))
-<div class="alert alert-danger alert-block">
+<div class="alert alert-danger alert-block custom-flash">
 	<button type="button" class="close" data-dismiss="alert">×</button>	
         <strong>{{ $message }}</strong>
 </div>
@@ -26,13 +26,5 @@
 <div class="alert alert-info alert-block">
 	<button type="button" class="close" data-dismiss="alert">×</button>	
 	<strong>{{ $message }}</strong>
-</div>
-@endif
-
-
-@if ($errors->any())
-<div class="alert alert-danger">
-	<button type="button" class="close" data-dismiss="alert">×</button>	
-	Please check the form below for errors
 </div>
 @endif

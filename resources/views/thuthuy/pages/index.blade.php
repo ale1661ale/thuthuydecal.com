@@ -4,8 +4,6 @@
 
 @section('breadcrumb', 'Home')
 
-@section('title-content', 'Dashboard')
-
 @section('content')
     <div class="kt-pagebody">
         <div class="row row-sm">
@@ -53,19 +51,6 @@
                     </div>
                     <!-- col-4 -->
 
-                    <div class="col-lg-4">
-                        <div class="card mg-t-20">
-                            <div class="card-body pd-b-0">
-                                <h6 class="card-body-title tx-12 tx-spacing-2 mg-b-20 tx-danger">Page Impressions</h6>
-                                <h2 class="tx-lato tx-inverse">674,221</h2>
-                                <p class="tx-12"><span class="tx-success">2.5%</span> change from yesterday</p>
-                            </div>
-                            <!-- card-body -->
-                            <div id="rs2" class="ht-50 ht-sm-70 mg-r--1"></div>
-                        </div>
-                        <!-- card -->
-                    </div>
-                    <!-- col-4 -->
                 </div>
                 <!-- row -->
 

@@ -50,6 +50,38 @@ $(document).ready(function(){
 			});
 		});
 	});
+
+	$('#check_all').on('click', function(e) {
+
+		if($(this).is(':checked',true))  
+
+		{
+
+		   $(".checkbox").prop('checked', true);  
+
+		} else {  
+
+		   $(".checkbox").prop('checked',false);  
+
+		}  
+
+	   });
+
+		$('.checkbox').on('click',function(){
+
+		   if($('.checkbox:checked').length == $('.checkbox').length){
+
+			   $('#check_all').prop('checked',true);
+
+		   }else{
+
+			   $('#check_all').prop('checked',false);
+
+		   }
+
+		});
+
+	
   	 	
 });
 

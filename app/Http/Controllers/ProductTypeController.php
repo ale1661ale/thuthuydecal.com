@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Product_Type;
+use App\Models\Category;
+use App\Models\Product_Type;
+use App\Http\Requests\ProductTypeRequest;
 use Illuminate\Http\Request;
+use Validator;
+use Illuminate\Support\Str;
+use Session;
 
 class ProductTypeController extends Controller
 {
@@ -14,7 +19,9 @@ class ProductTypeController extends Controller
      */
     public function index()
     {
-        //
+        $productType = Product_Type::orderBy('id', 'desc')->paginate(15);
+
+        return view('thuthuy.pages.product_types.index', compact('productType'));
     }
 
     /**
@@ -24,7 +31,9 @@ class ProductTypeController extends Controller
      */
     public function create()
     {
-        //
+        $category = Category::where('status', 1)->get();
+
+        return view('thuthuy.pages.product_types.create', compact('category'));
     }
 
     /**
@@ -33,9 +42,14 @@ class ProductTypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductTypeRequest $request)
     {
-        //
+        $data = $request->all();
+        $data['slug'] = Str::slug($request->input('name'));
+
+        Product_Type::create($data);
+
+        return redirect()->route('product-types.index')->with('success', 'Tạo mới thành công thể loại. '.$request->name);
     }
 
     /**

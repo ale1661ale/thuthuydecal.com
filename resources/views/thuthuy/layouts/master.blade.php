@@ -53,14 +53,12 @@
 
     <!-- ##### MAIN PANEL ##### -->
     <div class="kt-mainpanel">
-      <div class="kt-pagetitle">
-        <h5>@yield('title-content')</h5>
-      </div><!-- kt-pagetitle -->
       @include('flash_message')
-
-      @yield('content')
       
+      @yield('content')
+
       @include('thuthuy.layouts.footer')
+    
     </div><!-- kt-mainpanel -->
 
     <script src="assets/thuthuy/lib/jquery/jquery.js"></script>

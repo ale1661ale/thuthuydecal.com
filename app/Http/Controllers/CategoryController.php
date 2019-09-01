@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\CategoryRequest;
 use Validator;
 use Illuminate\Support\Str;
-use App\Http\Requests\CategoryRequest;
 use Session;
 
 class CategoryController extends Controller
@@ -18,7 +18,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = Category::orderBy('id', 'desc')->get();
+        $category = Category::orderBy('id', 'desc')->paginate(10);
 
         return view('thuthuy.pages.categories.index', compact('category'));
     }
@@ -92,9 +92,11 @@ class CategoryController extends Controller
                 'max' => 'Tên danh mục quá dài',
             ]
         );
-        if($validator->fails()){
+        if($validator->fails())
+        {
             return response()->json(['error' => 'true' ,'message' => $validator->errors()],200);
         }
+
         $category = Category::find($id);
 
         $category->update([
@@ -114,8 +116,28 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+        $category=Category::find($id);
+
+        $category->delete();
+
+        return redirect()->route('categories.index')->with('success', 'Đã xoá thành công danh mục ');
     }
+
+    public function delAll(Request $request)
+    {
+        $idCategory = $request->input('idCategories');
+
+        if (!empty($idCategory))
+        {
+            Category::whereIn('id', $idCategory)->delete();
+            return redirect()->route('categories.index')->with('success', 'Đã xoá thành công danh mục ');
+        }
+        else
+        {
+            return back()->with('error', 'Bạn cần phãi chọn danh mục cần xoá !');
+        }   
+    }
+
 }

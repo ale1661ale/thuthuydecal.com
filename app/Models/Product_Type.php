@@ -12,12 +12,12 @@ class Product_Type extends Model
         'id', 'name', 'slug', 'col_val', 'hot', 'id_cate', 'status',
     ];
 
-    public function category()
+    public function Category()
     {
         return $this->belongsTo('App\Models\Category', 'id_cate', 'id');
     }
 
-    public function product()
+    public function Product()
     {
         return $this->hasMany('App\Models\Product', 'id_protype', 'id');
     }

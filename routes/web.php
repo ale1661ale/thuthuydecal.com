@@ -18,9 +18,12 @@ Route::group(['prefix' => 'thuthuy'], function(){
     Route::view('/','thuthuy.pages.index');
 
     Route::resource('categories', 'CategoryController');
+    Route::delete('categories/{id}', 'CategoryController@destroy')->name('categories.destroy');
+    Route::post('categories/del', 'CategoryController@delAll')->name('categories.delAll');
 
-    Route::resource('product_types', 'ProductTypeController');
-    
+    Route::resource('product-types', 'ProductTypeController');
+    Route::post('product-types/del','ProductTypeController@delAll')->name('product_type.delAll');
+
     Route::resource('products', 'ProductController');
 });
 
