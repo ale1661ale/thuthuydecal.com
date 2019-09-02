@@ -62,9 +62,13 @@
         </div>
         <!-- row -->
         <div class="form-layout-footer">
-            <button type="submit" class="pure-button fuller-button blue">Tạo ngay</button>
-            <button type="submit" class="pure-button fuller-button blue">Tạo và thêm mới</button>
-            <button type="reset" class="pure-button fuller-button red">Huỷ</button>
+            <button type="submit" class="pure-button fuller-button blue" name="create" value="one">Tạo ngay</button>
+
+            <button type="submit" class="pure-button fuller-button blue" name="create" value="more">Tạo và thêm mới</button>
+
+            <a href="{{ route('product-types.index') }}">
+                <button type="button" class="pure-button fuller-button red">Huỷ</button>
+            </a>
         </div>
         <!-- form-layout-footer -->
         </form>

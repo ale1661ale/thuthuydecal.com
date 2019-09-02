@@ -26,7 +26,7 @@ $(document).ready(function(){
 				}
 			}
 		});
-		//edit category
+		//update category
 		$('.updateCategory').click(function(){
 			let name = $('.name').val();
 			let status = $('.status').val();
@@ -81,6 +81,110 @@ $(document).ready(function(){
 
 		});
 
+		//show edit product-type form
+		$('.editProType').click(function() {
+
+			let id = $(this).data('id');
+			
+			$.ajax({
+				url : 'thuthuy/product-types/' + id + '/edit',
+				dataType : 'json',
+				type : 'get',
+				success : function(data) 
+				{
+					$('.productTypeName').text(data.producttype.name);
+
+					$('.name').val(data.producttype.name);
+
+					$('.slug').val(data.producttype.slug);
+
+					if (data.producttype.status == 1)
+					{
+						$('.hien').attr('selected','selected');
+						$('.an').removeAttr('selected','selected');
+					}
+					else
+					{
+						$('.an').attr('selected','selected');
+						$('.hien').removeAttr('selected','selected');
+					}
+
+					var getCategory = '';
+					$.each(data.category, function($key, $value) {
+
+						if ($value['id'] == data.producttype.id_cate)
+						{
+							getCategory += '<option value=" '+ $value['id']+' " selected>';
+
+								getCategory += $value['name'];
+
+							getCategory += '</option>';
+						}
+						else
+						{
+							getCategory += '<option value=" '+ $value['id']+' ">';
+
+								getCategory += $value['name'];
+
+							getCategory += '</option>';
+						}
+					});
+					$('.id_cate').html(getCategory);
+
+					if (data.producttype.hot == 1)
+					{
+						$('.noibat').attr('selected','selected');
+
+						$('.thuong').removeAttr('selected','selected');
+					}
+					else
+					{
+						$('.thuong').attr('selected','selected');
+
+						$('.noibat').removeAttr('selected','selected');
+					}
+				}
+			});
+			
+			// update producttype
+			$('.updateProType').click(function() {
+				let name = $('.name').val();
+			
+				let hot = $('.hot').val();
+				
+				let id_cate = $('.id_cate').val();
+				
+				let status = $('.status').val();
+
+				$.ajax({
+					url : 'thuthuy/product-types/'+id,
+					dataType : 'json',
+					data : 
+					{
+						name : name,
+						hot : hot,
+						id_cate : id_cate,
+						status : status
+					},
+					type : 'put',
+					success : function(data)
+					{
+						console.log(data);
+						if (data.error == 'true')
+						{
+							$('.errorName').text(data.message.name[0])
+						}
+						else
+						{
+							$('#editProType').modal('hide');
+							location.reload();
+						}
+					}
+				});
+			});
+		});
+
+		
 	
   	 	
 });

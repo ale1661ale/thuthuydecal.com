@@ -44,9 +44,21 @@ class CategoryController extends Controller
         $data = $request->all();
         $data['slug'] = Str::slug($request->input('name'));
 
-        Category::create($data);
+        if($request->get('create') == 'one') 
+        {
+            Category::create($data);
 
-        return redirect()->route('categories.index')->with('success', 'Thêm mới thành công danh mục '.$request->name);
+            return redirect()->route('categories.index')->with('success', 'Tạo mới thành công danh mục '.$request->name);
+    
+        } 
+        else if($request->get('create') == 'more') {
+    
+            Category::create($data);
+
+            Session::flash('success', 'Thêm mới thành công ');
+
+            return view('thuthuy.pages.categories.create');
+        }
     }
 
     /**

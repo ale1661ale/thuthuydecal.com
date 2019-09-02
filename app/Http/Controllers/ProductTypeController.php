@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Validator;
 use Illuminate\Support\Str;
 use Session;
+use Illuminate\Support\Facades\Input;
 
 class ProductTypeController extends Controller
 {
@@ -44,18 +45,34 @@ class ProductTypeController extends Controller
      */
     public function store(ProductTypeRequest $request)
     {
+        $category = Category::where('status', 1)->get();
+
         $data = $request->all();
         $data['slug'] = Str::slug($request->input('name'));
 
-        Product_Type::create($data);
+        if($request->get('create') == 'one') 
+        {
+            Product_Type::create($data);
 
-        return redirect()->route('product-types.index')->with('success', 'Tạo mới thành công thể loại. '.$request->name);
+            return redirect()->route('product-types.index')->with('success', 'Tạo mới thành công thể loại '.$request->name);
+    
+        } 
+        else if($request->get('create') == 'more') {
+    
+            Product_Type::create($data);
+
+            Session::flash('success', 'Thêm mới thành công ');
+
+            return view('thuthuy.pages.product_types.create', compact('category'));
+        }
+
+        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product_Type  $product_Type
+     * @param  \App\$id
      * @return \Illuminate\Http\Response
      */
     public function show(Product_Type $product_Type)
@@ -66,24 +83,52 @@ class ProductTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Product_Type  $product_Type
+     * @param  \App\$id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product_Type $product_Type)
+    public function edit($id)
     {
-        //
+        $category = Category::where('status', 1)->get();
+
+        $productType = Product_Type::find($id);
+
+        return response()->json(['category' => $category, 'producttype' => $productType], 200);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product_Type  $product_Type
+     * @param  \App\$id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product_Type $product_Type)
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(),
+        [
+            'name' => 'required|min:2|max:255',
+        ],
+        [
+            'required' => 'Tên thể loại không được bỏ trống',
+            'min' => 'Tên thể loại không được ngắn hơn 2 ký tự',
+            'max' => 'Tên thể loại không được dài hơn 255 ký tự'
+        ]);
+
+        if ($validator->fails())
+        {
+            return response()->json(['error' => 'true', 'message' => $validator->errors()], 200);
+        }
+
+        $productType = Product_Type::find($id);
+
+        $data = $request->all();
+        $data['slug'] = Str::slug($request->input('name'));
+
+        $productType->update($data);
+
+        Session::flash('success', 'Cập nhật thành công ');
+
+        return response()->json(200);
     }
 
     /**
@@ -92,8 +137,29 @@ class ProductTypeController extends Controller
      * @param  \App\Product_Type  $product_Type
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product_Type $product_Type)
+    public function destroy($id)
     {
-        //
+        $productType = Product_Type::find($id);
+
+        if ($productType->delete())
+        {
+            return redirect()->route('product-types.index')->with('success', 'Đã xoá thành công thể loại ');
+        }
     }
+
+    public function delAll(Request $request)
+    {
+        $idProductType = $request->input('idProTypes');
+
+        if (!empty($idProductType))
+        {
+            Product_Type::whereIn('id', $idProductType)->delete();
+            return redirect()->route('product-types.index')->with('success', 'Đã xoá thành công danh mục ');
+        }
+        else
+        {
+            return back()->with('error', 'Bạn cần phãi chọn thể loại cần xoá !');
+        }  
+    }
+
 }

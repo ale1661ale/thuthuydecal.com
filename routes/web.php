@@ -22,7 +22,8 @@ Route::group(['prefix' => 'thuthuy'], function(){
     Route::post('categories/del', 'CategoryController@delAll')->name('categories.delAll');
 
     Route::resource('product-types', 'ProductTypeController');
-    Route::post('product-types/del','ProductTypeController@delAll')->name('product_type.delAll');
+    Route::post('product-types/del','ProductTypeController@delAll')->name('product-types.delAll');
+    Route::delete('product-types/{id}', 'ProductTypeController@destroy')->name('product-types.destroy');
 
     Route::resource('products', 'ProductController');
 });
