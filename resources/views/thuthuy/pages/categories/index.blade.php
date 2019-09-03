@@ -41,7 +41,7 @@
                 @foreach($category as $key => $value)
                 <tr>
                     <td>
-                        <input type="checkbox" class="category_checkbox" value="{{ $value->id }}" name="idCategories[]">
+                        <input type="checkbox" class="checkbox" value="{{ $value->id }}" name="idCategories[]">
                     </td>
                     <td>{{ $key+1 }}</td>
                     <td>

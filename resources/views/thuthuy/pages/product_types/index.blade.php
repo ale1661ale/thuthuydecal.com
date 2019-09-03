@@ -71,7 +71,7 @@
                     </td>
                     <td>{{ $value->created_at }}</td>
                     <td>
-                        <a href="{{ url('/product-types', ['id' => $value->id]) }}" data-toggle="modal" 
+                        <a href="{{ url('/thuthuy/product-types', ['id' => $value->id]) }}" data-toggle="modal" 
                         data-target="#deleteProType">
                         <button class="btn btn-danger"><i class="fa fa-eraser pd-r-10" aria-hidden="true"></i>Xoá</button>
                         </a>

@@ -26,5 +26,6 @@ Route::group(['prefix' => 'thuthuy'], function(){
     Route::delete('product-types/{id}', 'ProductTypeController@destroy')->name('product-types.destroy');
 
     Route::resource('products', 'ProductController');
+    Route::get('products/{id}/list', 'ProductController@listProduct')->name('products.list');
 });
 

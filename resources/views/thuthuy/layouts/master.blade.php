@@ -73,6 +73,13 @@
     <script src="assets/thuthuy/js/ResizeSensor.js"></script>
     <script src="assets/thuthuy/js/dashboard.js"></script>
     <script src="assets/thuthuy/js/ajax.js"></script>
+    <script src="ckeditor/ckeditor.js"></script>
+
+    <script>
+        if($("textarea").length > 0){
+            CKEDITOR.replace( 'demon' );
+        }
+    </script>
     
     <script>
       setTimeout(function(){
