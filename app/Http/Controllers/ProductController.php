@@ -11,8 +11,10 @@ use Illuminate\Support\Str;
 use Validator;
 use File;
 use Merge;
+use Session;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 class ProductController extends Controller
 {
@@ -96,10 +98,15 @@ class ProductController extends Controller
                 return back()->with('error','Đây không phãi là file ảnh');
             }
         }
-        else
-        {
-            return back()->with('error','Vui lòng chọn file ảnh');
-        }
+        $data = $request->all();
+
+        $data['slug'] = Str::slug($request->input('name'));
+        $data['key_word'] = $request->input('name').','.Str::slug($request->input('name'));
+        $data['content'] = Str::limit(trim(strip_tags($request->input('content'))), 250);
+
+        Product::create($data);
+
+        return redirect()->route('products.index')->with('success','Đã thêm thành công '.$request->name);
     }
 
     /**
@@ -142,15 +149,65 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+
+        if ($product->delete())
+        {
+            if (!empty($product->image))
+            {
+                if (file_exists(public_path('img/upload/product/'. $product->image)))
+                {
+                    unlink(public_path('uploads/products/'. $product->image));
+
+                    Session::flash('success', 'Đã xoá thành công ');
+
+                    return response()->json(200);
+                }
+            }
+            else
+            {
+                Session::flash('success', 'Đã xoá thành công ');
+
+                return response()->json(200);
+            }
+            
+        }
+        else
+        {
+            return back()->with('error', 'Có lỗi xảy ra, vui lòng thử lại .');
+        }
     }
 
-    public function listProduct($id)
+    public function detailsProduct($id)
     {
         $product = $this->productRepository->getProductById($id);
 
-        return view('thuthuy.pages.products.list', compact('product'));
+        return view('thuthuy.pages.products.detail', compact('product'));
+    }
+
+    public function search(Request $request)
+    {
+        $search = Input::get('search');
+
+        if ($search != '')
+        {
+            $product = Product::where('key_word', 'like', '%'. $search .'%')
+                                    ->get();
+            if (count($product) > 0)
+            {
+                return view('thuthuy.pages.products.index')->withDetails($product)
+                                                                ->withQuery($search);
+            }
+            else
+            {
+                return view('thuthuy.pages.products.index')->withMessage('Không tìm thấy kết quả tìm kiếm');
+            }
+        }
+        else
+        {
+            return view('thuthuy.pages.products.index')->withMessage('Không tìm thấy kết quả .');
+        }
     }
 }

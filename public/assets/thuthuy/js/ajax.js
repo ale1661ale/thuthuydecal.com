@@ -183,7 +183,39 @@ $(document).ready(function(){
 				});
 			});
 		});
+		
+		// delete producttype
+		$('.deleteProductType').click(function() {
+			let id = $(this).data('id');
+			$('.delProductType').click(function() {
+				$.ajax({
+					url : 'thuthuy/product-types/'+id,
+					dataType : 'json',
+					type : 'delete',
+					success : function(data)
+					{
+						location.reload();
+					}
+				});
+			});
+		});
 
+		// delete product
+		$('.deleteProduct').click(function() {
+			let id = $(this).data('id');
+			$('.delProduct').click(function() {
+				$.ajax({
+					url : 'thuthuy/products/'+id,
+					dataType : 'json',
+					type : 'delete',
+					success : function(data)
+					{
+						location.reload();
+					}
+				});
+			});
+		});
+		
 		
 	
   	 	

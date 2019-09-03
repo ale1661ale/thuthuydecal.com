@@ -141,10 +141,11 @@ class ProductTypeController extends Controller
     {
         $productType = Product_Type::find($id);
 
-        if ($productType->delete())
-        {
-            return redirect()->route('product-types.index')->with('success', 'Đã xoá thành công thể loại ');
-        }
+        $productType->delete();
+
+        Session::flash('success', 'Đã xoá thành công .');
+
+        return response()->json(200);
     }
 
     public function delAll(Request $request)
@@ -160,6 +161,31 @@ class ProductTypeController extends Controller
         {
             return back()->with('error', 'Bạn cần phãi chọn thể loại cần xoá !');
         }  
+    }
+
+    public function search(Request $request)
+    {
+        $search = Input::get(['name'=>'search']);
+
+        if ($search != '')
+        {
+            $productType = Product_Type::where('name', 'like', '%'. $search .'%')
+                                        ->orWhere('slug', 'like', '%'. $search .'%')
+                                        ->get();
+            if (count($productType) > 0)
+            {
+                return view('thuthuy.pages.product_types.index')->withDetails($productType)
+                                                                ->withQuery($search);
+            }
+            else
+            {
+                return view('thuthuy.pages.product_types.index')->withMessage('Không tìm thấy kết quả tìm kiếm');
+            }
+        }
+        else
+        {
+            return redirect()->route('product-types.index')->with('error', 'Không tìm thấy kết quả tìm kiếm');
+        }
     }
 
 }

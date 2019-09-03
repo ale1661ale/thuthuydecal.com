@@ -23,9 +23,10 @@ Route::group(['prefix' => 'thuthuy'], function(){
 
     Route::resource('product-types', 'ProductTypeController');
     Route::post('product-types/del','ProductTypeController@delAll')->name('product-types.delAll');
-    Route::delete('product-types/{id}', 'ProductTypeController@destroy')->name('product-types.destroy');
+    Route::post('/search/product-types', 'ProductTypeController@search')->name('product-types.search');
 
     Route::resource('products', 'ProductController');
-    Route::get('products/{id}/list', 'ProductController@listProduct')->name('products.list');
+    Route::get('products/{id}/details', 'ProductController@detailsProduct')->name('products.details');
+    Route::post('/search/products', 'ProductController@search')->name('products.search');
 });
 
