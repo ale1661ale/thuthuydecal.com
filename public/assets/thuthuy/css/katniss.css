@@ -199,6 +199,11 @@ abbr[data-original-title] {
   border-bottom: 0;
 }
 /* ale css */
+.imageThumb
+{
+  margin-left:12px;
+}
+
 .btn-search 
 {
   background-color: #6da5bf;

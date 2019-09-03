@@ -120,8 +120,8 @@
                     <select class="form-control" name="hot">
                         <option value="0" class="noibat">Sản phẩm thường</option>
                         <option value="1" class="thuong">Sản phẩm nổi bật</option>
-                        <option value="2" class="thuong">Sản phẩm mới</option>
-                        <option value="3" class="thuong">Sản phẩm bán chạy</option>
+                        <option value="2" class="thuong">Sản phẩm bán chạy</option>
+                        <option value="3" class="thuong">Sản phẩm mới</option>
                     </select>
                 </div>
             </div>

@@ -182,9 +182,13 @@ class ProductController extends Controller
 
     public function detailsProduct($id)
     {
+        $category = Category::where('status', 1)->get();
+
+        $productType = Product_Type::where('status', 1)->get();
+
         $product = $this->productRepository->getProductById($id);
 
-        return view('thuthuy.pages.products.detail', compact('product'));
+        return view('thuthuy.pages.products.detail', compact('product', 'category', 'productType'));
     }
 
     public function search(Request $request)

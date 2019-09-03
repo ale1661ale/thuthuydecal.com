@@ -58,7 +58,9 @@
                     <td>{{ $value->created_at }}</td>
 
                     <td>
-                        <a href="{{ route('products.details', $value->id) }}" data-id="{{ $value->id }}" class="btn btn-success">
+                        <a  href="{{ route('products.details', $value->id) }}" 
+                            data-id="{{ $value->id }}" 
+                            class="btn btn-success viewProduct">
                             <i class="fa fa-eye" aria-hidden="true"></i>
                         </a>
                     
@@ -113,7 +115,7 @@
             <tr>
                 <th><input type="checkbox" id="check_all"></th>
                 <th>STT</th>
-                <th>Tên dm</th>
+                <th>Tên sp</th>
                 <th>Hình ảnh</th>
                 <th>Tình trạng</th>
                 <th>Tạo vào lúc</th>

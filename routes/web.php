@@ -14,6 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::group(['prefix' => 'thuthuy'], function(){
     Route::view('/','thuthuy.pages.index');
 
@@ -29,4 +30,6 @@ Route::group(['prefix' => 'thuthuy'], function(){
     Route::get('products/{id}/details', 'ProductController@detailsProduct')->name('products.details');
     Route::post('/search/products', 'ProductController@search')->name('products.search');
 });
+
+Route::get('get-product-type','AjaxController@getProductType');
 

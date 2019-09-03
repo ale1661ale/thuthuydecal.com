@@ -215,6 +215,31 @@ $(document).ready(function(){
 				});
 			});
 		});
+
+		// get producttype from category
+		$('.id_cate').change(function(){
+			let id_cate = $(this).val();
+
+			$.ajax({
+				url : 'get-product-type',
+				dataType : 'json',
+				type : 'get',
+				data : {
+					id_cate : id_cate,
+				},
+				success : function(data){
+					//console.log(data);
+					let html = '';
+					$.each(data,function($key,$value){
+						html += '<option value="'+$value['id']+'" selected >';
+							html += $value['name'];
+						html += '</option>';
+					});
+					$('.id_protype').html(html);
+				}
+			});
+			
+		});
 		
 		
 	
