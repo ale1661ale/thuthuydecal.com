@@ -3,6 +3,7 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
+
 $(document).ready(function(){
 
 	//show edit category form
@@ -38,11 +39,14 @@ $(document).ready(function(){
 					status : status,
 				},
 				type : 'put',
-				success : function(data){
-					if(data.error == 'true'){
+				success : function(data) {
+					if(data.error == 'true')
+					{
 						$('.error').show();
 						$('.error').text(data.message.name[0]);
-					}else{
+					}
+					else
+					{
                         $('#editCategory').modal('hide');
                         location.reload();
 					}
@@ -217,17 +221,19 @@ $(document).ready(function(){
 		});
 
 		// get producttype from category
-		$('.id_cate').change(function(){
+		$('.id_cate').change(function() {
 			let id_cate = $(this).val();
 
 			$.ajax({
 				url : 'get-product-type',
 				dataType : 'json',
 				type : 'get',
-				data : {
+				data : 
+				{
 					id_cate : id_cate,
 				},
-				success : function(data){
+				success : function(data)
+				{
 					//console.log(data);
 					let html = '';
 					$.each(data,function($key,$value){
@@ -239,6 +245,110 @@ $(document).ready(function(){
 				}
 			});
 			
+		});
+
+		// get edit product form
+		$('.editProduct').click(function () {
+			let id = $(this).data('id');
+			
+			$.ajax({
+				url : 'thuthuy/products/'+ id + '/edit',
+				dataType : 'json',
+				type : 'get',
+				success : function(data)
+				{
+					$('.name').val(data.product.name);
+
+					$('.imageThum').attr('src', 'img/upload/product/' + data.product.image);
+
+					var id_cate = '';
+					$.each(data.category, function($key, $value) {
+						if (data.product.id_cate == $value['id'])
+						{
+							id_cate += '<option value=" ' + $value['id'] + ' " selected >';
+								id_cate += $value['name'];
+							id_cate += '</option>';
+						}
+						else
+						{
+							id_cate += '<option value=" ' + $value['id'] + ' " >';
+								id_cate += $value['name'];
+							id_cate += '</option>';
+						}
+					});
+					$('.id_cate').html(id_cate);
+
+					var id_protype = '';
+					$.each(data.productType, function($key, $value) {
+						if (data.product.id_protype == $value['id'])
+						{
+							id_protype += '<option value=" ' + $value['id'] + ' " selected >';
+								id_protype += $value['name'];
+							id_protype += '</option>';
+						}
+						else
+						{
+							id_protype += '<option value=" ' + $value['id'] + ' " >';
+								id_protype += $value['name'];
+							id_protype += '</option>';
+						}
+					});
+					$('.id_protype').html(id_protype);
+
+					if (data.product.status == 1)
+					{
+						$('.hien').attr('selected','selected');
+						$('.an').removeAttr('selected','selected');
+					}
+					else
+					{
+						$('.an').attr('selected','selected');
+						$('.hien').removeAttr('selected','selected');
+					}
+				}
+			});
+			$('#updateProduct').on('submit', function(event) {
+
+				event.preventDefault();
+
+				$.ajax({
+					url : 'thuthuy/update-products/' +id,
+					
+					data : new FormData(this),
+
+					contentType : false,
+
+					processData : false,
+
+					cache : false,
+
+					type : 'post',
+
+					success : function(data)
+					{
+						if (data.error == 'true')
+						{
+							if (data.message.name)
+							{
+								$('.errorName').show();
+
+								$('.errorName').html(data.message.name[0]);
+							}
+							if (data.message.image)
+							{
+								$('.errorImage').show();
+
+								$('.errorImage').html(data.message.image[0]);
+							}
+						}
+						else
+						{
+							location.reload();
+						}
+					} 
+				});
+			});
+
 		});
 		
 		

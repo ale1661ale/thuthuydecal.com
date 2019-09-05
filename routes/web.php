@@ -15,7 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'thuthuy'], function(){
+Route::get('thuthuy/login','AdminLoginController@getLogin')->name('login.admin');
+Route::post('thuthuy/login','AdminLoginController@postLogin')->name('admin.login');
+Route::get('thuthuy/logout','AdminLoginController@getLogout')->name('logout.admin');
+
+Route::group(['prefix' => 'thuthuy','middleware' => 'CheckAdminLogin'], function(){
     Route::view('/','thuthuy.pages.index');
 
     Route::resource('categories', 'CategoryController');
@@ -27,8 +31,12 @@ Route::group(['prefix' => 'thuthuy'], function(){
     Route::post('/search/product-types', 'ProductTypeController@search')->name('product-types.search');
 
     Route::resource('products', 'ProductController');
+    Route::post('products/del', 'ProductController@delAll')->name('products.delAll');
     Route::get('products/{id}/details', 'ProductController@detailsProduct')->name('products.details');
     Route::post('/search/products', 'ProductController@search')->name('products.search');
+    Route::post('update-products/{id}', 'ProductController@updateAjax');
+    Route::post('products/{id}', 'ProductController@update')->name('products.update');
+    
 });
 
 Route::get('get-product-type','AjaxController@getProductType');

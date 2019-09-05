@@ -126,9 +126,15 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        //
+        $category = Category::where('status', 1)->get();
+
+        $productType = Product_Type::where('status', 1)->get();
+
+        $product = Product::find($id);
+
+        return response()->json(['category' => $category, 'productType' => $productType, 'product' => $product], 200);
     }
 
     /**
@@ -138,9 +144,123 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, $id)
     {
-        //
+        $product = Product::find($id);
+
+        $data = $request->all();
+
+        $data['slug'] = Str::slug($request->input('name'));
+        $data['key_word'] = $request->input('name').','.Str::slug($request->input('name'));
+        $data['content'] = Str::limit(trim(strip_tags($request->input('content'))), 250);
+
+        if ($request->hasFile('image')) 
+        {
+            $file = $request->image;
+            $file_name = $file->getClientOriginalName();
+            $file_type = $file->getMimeType();
+            $file_size = $file->getSize();
+
+            if ($file_type == 'image/png' || $file_type == 'image/jpg' || $file_type == 'image/jpeg' || $file_type == 'image/gif')
+            {
+                if ($file_size <= 1048576 )
+                {
+                    $file_name = date('d-m-y').'-'.rand().'-'.Str::slug($file_name);
+
+                    if ($file->move('img/upload/product/',$file_name))
+                    {
+                        $data['image'] = $file_name;
+                    }
+                }
+                else
+                {
+                    return back()->with('error', 'Hình ảnh không được lớn hơn 1MB');
+                }
+            }
+            else
+            {
+                return back()->with('error', 'Không đúng định dạng file ảnh ?');
+            }
+        }
+        else
+        {
+            $data['image'] = $product->image;
+        }
+
+        $product->update($data);
+
+        return back()->with('success','Đã cập nhật thành công '.$request->name);
+    }
+
+    public function updateAjax(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(),
+            [
+                'name' => 'required|min:2|max:255',
+                'image' => 'image',
+            ],
+            [
+                'required' => ':attribute không được bỏ trống',
+                'min' => ':attribute quá ngắn',
+                'max' => ':attribute quá dài',
+                'image' => ':attribute không phãi là file ảnh',
+            ],
+            [
+                'name' => 'Tên sản phẩm',
+                'image' => 'Hình ảnh sản phẩm',
+            ]);
+        
+        if ($validator->fails())
+        {
+            return response()->json(['error' => 'true', 'message' => $validator->errors()], 200);
+        }
+
+        $product = Product::find($id);
+
+        $data = $request->all();
+
+        $data['slug'] = Str::slug($request->input('name'));
+
+        $data['key_word'] = $request->input('name').','.Str::slug($request->input('name'));
+
+        if ($request->hasFile('image')) 
+        {
+            $file = $request->image;
+            $file_name = $file->getClientOriginalName();
+            $file_type = $file->getMimeType();
+            $file_size = $file->getSize();
+
+            if ($file_type == 'image/png' || $file_type == 'image/jpg' || $file_type == 'image/jpeg' || $file_type == 'image/gif')
+            {
+                if ($file_size <= 1048576 )
+                {
+                    $file_name = date('d-m-y').'-'.rand().'-'.Str::slug($file_name);
+
+                    if ($file->move('img/upload/product/',$file_name))
+                    {
+                        $data['image'] = $file_name;
+                    }
+                }
+                else
+                {
+                    return response()->json(['error' => ' File ảnh không được lớn hơn 1MB '],200);
+                }
+            }
+            else
+            {
+                return response()->json(['error' => ' Đây không phãi là file ảnh '],200);
+            }
+        }
+        else
+        {
+            $data['image'] = $product->image;
+        }
+
+        $product->update($data);
+
+        Session::flash('success', 'Đã cập nhật thành công ');
+
+        return response()->json(200);
     }
 
     /**
@@ -180,6 +300,22 @@ class ProductController extends Controller
         }
     }
 
+    public function delAll(Request $request)
+    {
+        $idProduct = $request->input('idProducts');
+
+        if (!empty($idProduct))
+        {
+            Product::whereIn('id', $idProduct)->delete();
+
+            return redirect()->route('products.index')->with('success', 'Đã xoá thành công danh mục ');
+        }
+        else
+        {
+            return back()->with('error', 'Bạn cần phãi chọn thể loại cần xoá !');
+        }  
+    }
+
     public function detailsProduct($id)
     {
         $category = Category::where('status', 1)->get();
@@ -198,7 +334,7 @@ class ProductController extends Controller
         if ($search != '')
         {
             $product = Product::where('key_word', 'like', '%'. $search .'%')
-                                    ->get();
+                                    ->orderBy('created_at', 'desc')->get();
             if (count($product) > 0)
             {
                 return view('thuthuy.pages.products.index')->withDetails($product)
