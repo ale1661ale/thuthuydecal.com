@@ -190,6 +190,17 @@
 
             <div class="col-lg-6">
                 <div class="form-group mg-b-10-force">
+                    <label class="form-control-label">Tình trạng hàng : </label>
+                    <select class="form-control sold_out" name="sold_out">
+                        <option value="1" {{ $product->sold_out == 1 ? 'selected' : '' }} class="con">Còn hàng</option>
+                        <option value="0" {{ $product->sold_out == 0 ? 'selected' : '' }} class="het">Hết hàng</option>
+                    </select>
+                </div>
+            </div>
+            <!-- col-6 -->
+
+            <div class="col-lg-6">
+                <div class="form-group mg-b-10-force">
                     <label class="form-control-label">Cập nhật gần đây nhất: </label>
                     <p class="form-control updated_at" name="updated_at">{{ $product->updated_at }}</p>
                 </div>
