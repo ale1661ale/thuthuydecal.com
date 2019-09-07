@@ -13,13 +13,7 @@ class AdminLoginController extends Controller
 
     public function getLogin()
     {
-        if (Auth::check()) {
-            // nếu đăng nhập thàng công thì 
-            return view('thuthuy.pages.index');
-        } else {
-            return view('thuthuy.login');
-        }
-
+        return view('thuthuy.pages.login');
     }
 
     /**
@@ -29,13 +23,13 @@ class AdminLoginController extends Controller
     public function postLogin(LoginRequest $request)
     {
         $login = [
-            'email' => $request->email,
-            'password' => $request->password,
+            'email' => $request->input('email'),
+            'password' => $request->input('password'),
             'role' => 1,
             'status' => 1
         ];
         if (Auth::attempt($login)) {
-            return view('thuthuy.pages.index')->with('success', 'Đăng nhập thành công !');
+            return redirect('/thuthuy')->with('success', 'Đăng nhập thành công !');
         } else {
             return back()->with('error', 'Email hoặc Password không chính xác');
         }

@@ -35,8 +35,7 @@ Route::group(['prefix' => 'thuthuy','middleware' => 'CheckAdminLogin'], function
     Route::get('products/{id}/details', 'ProductController@detailsProduct')->name('products.details');
     Route::post('/search/products', 'ProductController@search')->name('products.search');
     Route::post('update-products/{id}', 'ProductController@updateAjax');
-    Route::post('products/{id}', 'ProductController@update')->name('products.update');
-    
+    Route::post('products/{id}', 'ProductController@update')->name('products.update'); 
 });
 
 Route::get('get-product-type','AjaxController@getProductType');
