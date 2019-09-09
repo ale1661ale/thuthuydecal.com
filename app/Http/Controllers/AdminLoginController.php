@@ -25,12 +25,29 @@ class AdminLoginController extends Controller
         $login = [
             'email' => $request->input('email'),
             'password' => $request->input('password'),
-            'role' => 1,
-            'status' => 1
+            'status' => 1,
         ];
         if (Auth::attempt($login)) {
-            return redirect('/thuthuy')->with('success', 'Đăng nhập thành công !');
-        } else {
+
+            if (Auth::user()->role == 1)
+            {
+                if (Auth::user()->sex == 1)
+                {
+                    return redirect('/thuthuy')->with('success', 'Xin chào Anh ' .Auth::user()->name);
+                }
+                else
+                {
+                    return redirect('/thuthuy')->with('success', 'Xin chào Chị ' .Auth::user()->name);
+                }
+            }
+            elseif (Auth::user()->role == 0)
+            {
+                return back()->with('error', 'Bạn không có quyền đăng nhập trang này ');
+            }
+            
+        } 
+        else 
+        {
             return back()->with('error', 'Email hoặc Password không chính xác');
         }
     }

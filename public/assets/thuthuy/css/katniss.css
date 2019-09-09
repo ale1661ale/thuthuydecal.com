@@ -12416,7 +12416,8 @@ textarea.parsley-success:focus {
   color: #3B6998;
   background-color: #e9ecef;
 }
-.kt-headpanel-right .user-profile-nav .icon {
+.kt-headpanel-right .user-profile-nav .icon,
+.kt-headpanel-right .user-profile-nav .ionicons {
   display: inline-block;
   width: 20px;
   line-height: 0;

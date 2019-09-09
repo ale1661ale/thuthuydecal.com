@@ -1,6 +1,5 @@
 <!-- ##### SIDEBAR MENU ##### -->
 <div class="kt-sideleft">
-    <label class="kt-sidebar-label">Navigation</label>
     <ul class="nav kt-sideleft-menu">
 
     <li class="nav-item">

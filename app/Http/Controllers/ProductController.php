@@ -81,7 +81,7 @@ class ProductController extends Controller
                         $data['slug'] = Str::slug($request->input('name'));
                         $data['image'] = $file_name;
                         $data['key_word'] = $request->input('name').','.Str::slug($request->input('name'));
-                        $data['content'] = Str::limit(trim(strip_tags($request->input('content'))), 250);
+                        $data['content'] = $request->input('content');
 
                         Product::create($data);
 
@@ -102,7 +102,7 @@ class ProductController extends Controller
 
         $data['slug'] = Str::slug($request->input('name'));
         $data['key_word'] = $request->input('name').','.Str::slug($request->input('name'));
-        $data['content'] = Str::limit(trim(strip_tags($request->input('content'))), 250);
+        $data['content'] = $request->input('content');
 
         Product::create($data);
 
@@ -152,7 +152,7 @@ class ProductController extends Controller
 
         $data['slug'] = Str::slug($request->input('name'));
         $data['key_word'] = $request->input('name').','.Str::slug($request->input('name'));
-        $data['content'] = Str::limit(trim(strip_tags($request->input('content'))), 250);
+        $data['content'] = $request->input('content');
 
         if ($request->hasFile('image')) 
         {

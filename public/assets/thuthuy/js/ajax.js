@@ -350,6 +350,44 @@ $(document).ready(function(){
 			});
 
 		});
+
+		// delete introduce
+		$('.deleteIntroduce').click(function() {
+			let id = $(this).data('id');
+			$('.delIntroduce').click(function() {
+				$.ajax({
+					url : 'thuthuy/introduces/'+id,
+					dataType : 'json',
+					type : 'delete',
+					success : function(data)
+					{
+						location.reload();
+					}
+				});
+			});
+		});
+
+		$('.deleteAdmin').click(function() {
+
+			let id = $(this).data('id');
+
+			$('.delAdmin').click(function() {
+				$.ajax({
+					url : 'thuthuy/admins/'+id,
+					dataType : 'json',
+					type : 'delete',
+					success : function(data)
+					{
+						location.reload();
+					}
+				});
+			});
+		});
+
+		
+
+
+		
 		
 		
 	

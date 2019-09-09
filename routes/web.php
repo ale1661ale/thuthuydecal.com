@@ -38,6 +38,14 @@ Route::group(['prefix' => 'thuthuy','middleware' => 'CheckAdminLogin'], function
     Route::post('products/{id}', 'ProductController@update')->name('products.update');
     
     Route::resource('introduces', 'IntroduceController');
+    Route::post('introduces/del', 'IntroduceController@delAll')->name('introduces.delAll');
+    Route::get('introduces/{id}/details', 'IntroduceController@edit')->name('introduces.edit');
+    Route::post('introduces/{id}', 'IntroduceController@update')->name('introduces.update');
+    
+    Route::resource('admins', 'AdminController');
+    Route::get('admis/{id}/details', 'AdminController@edit')->name('admins.edit');
+    Route::post('admis/{id}/details', 'AdminController@update')->name('admins.update');
+    Route::post('admins/changepassword','AdminController@changePassword')->name('admins.changePassword');
 });
 
 Route::get('get-product-type','AjaxController@getProductType');
