@@ -4,9 +4,16 @@
     <ul class="nav kt-sideleft-menu">
 
     <li class="nav-item">
-        <a href="thuthuy" class="nav-link active">
+        <a href="thuthuy" class="nav-link">
         <i class="icon ion-ios-home-outline"></i>
         <span>Trang Chủ</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a href="{{ route('introduces.index') }}" class="nav-link">
+            <i class="icon ion-laptop"></i>
+            <span>Giới thiệu</span>
         </a>
     </li>
 

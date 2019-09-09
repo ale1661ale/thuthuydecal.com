@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Introduce;
+use App\Models\Introduce;
 use Illuminate\Http\Request;
 
 class IntroduceController extends Controller
@@ -14,7 +14,9 @@ class IntroduceController extends Controller
      */
     public function index()
     {
-        //
+        $intro = Introduce::paginate(10);
+
+        return view('thuthuy.pages.introduces.index', compact('intro'));
     }
 
     /**
