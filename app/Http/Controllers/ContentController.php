@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Content;
+use App\Models\Content;
+use App\Models\Content_Type;
 use Illuminate\Http\Request;
+use App\Http\Requests\ContentRequest;
+use Illuminate\Support\Str;
+use Validator;
+use Session;
 
 class ContentController extends Controller
 {
@@ -14,7 +19,9 @@ class ContentController extends Controller
      */
     public function index()
     {
-        //
+        $content = Content::orderBy('created_at', 'desc')->paginate(10);
+
+        return view('thuthuy.pages.contents.index', compact('content'));
     }
 
     /**
@@ -24,7 +31,9 @@ class ContentController extends Controller
      */
     public function create()
     {
-        //
+        $content_type = Content_Type::where('status', 1)->get();
+
+        return view('thuthuy.pages.contents.create', compact('content_type'));
     }
 
     /**
@@ -33,9 +42,49 @@ class ContentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ContentRequest $request)
     {
-        //
+        $data = $request->all();
+
+        $data['slug'] = Str::slug($request->input('title'));
+        
+        $data['content'] = $request->input('content');
+
+        if($request->hasFile('image'))
+        {
+            $file = $request->image;
+
+            $file_name = $file->getClientOriginalName();
+
+            $file_type = $file->getMimeType();
+
+            $file_size = $file->getSize();
+
+            if ($file_type == 'image/png' || $file_type == 'image/jpg' || $file_type == 'image/jpeg' || $file_type == 'image/gif')
+            {
+                if ($file_size <= 1048576 )
+                {
+                    $file_name = date('d-m-y').'-'.rand().'-'.Str::slug($file_name);
+
+                    if ($file->move('img/upload/content',$file_name))
+                    {
+                        $data['image'] = $file_name;
+                    }
+                }
+                else
+                {
+                    return back()->with('error','file ảnh không được lớn hơn 1MB');
+                }
+            }
+            else
+            {
+                return back()->with('error','Đây không phãi là file ảnh');
+            }
+        }
+
+        Content::create($data);
+
+        return redirect()->route('contents.index')->with('success','Đã tạo mới thành công bài viết '.$request->title);
     }
 
     /**
@@ -55,9 +104,12 @@ class ContentController extends Controller
      * @param  \App\Content  $content
      * @return \Illuminate\Http\Response
      */
-    public function edit(Content $content)
+    public function edit($id)
     {
-        //
+        $content_type = Content_Type::where('status',1)->get();
+        $content = Content::find($id);
+
+        return view('thuthuy.pages.contents.detail', compact('content', 'content_type'));
     }
 
     /**
@@ -67,9 +119,51 @@ class ContentController extends Controller
      * @param  \App\Content  $content
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Content $content)
+    public function update(ContentRequest $request, $id)
     {
-        //
+        $content = Content::find($id);
+
+        $data = $request->all();
+
+        $data['slug'] = Str::slug($request->input('title'));
+        $data['content'] = $request->input('content');
+
+        if ($request->hasFile('image')) 
+        {
+            $file = $request->image;
+            $file_name = $file->getClientOriginalName();
+            $file_type = $file->getMimeType();
+            $file_size = $file->getSize();
+
+            if ($file_type == 'image/png' || $file_type == 'image/jpg' || $file_type == 'image/jpeg' || $file_type == 'image/gif')
+            {
+                if ($file_size <= 1048576 )
+                {
+                    $file_name = date('d-m-y').'-'.rand().'-'.Str::slug($file_name);
+
+                    if ($file->move('img/upload/content/',$file_name))
+                    {
+                        $data['image'] = $file_name;
+                    }
+                }
+                else
+                {
+                    return back()->with('error', 'Hình ảnh không được lớn hơn 1MB');
+                }
+            }
+            else
+            {
+                return back()->with('error', 'Không đúng định dạng file ảnh ?');
+            }
+        }
+        else
+        {
+            $data['image'] = $content->image;
+        }
+
+        $content->update($data);
+
+        return back()->with('success','Đã cập nhật thành công '.$request->title);
     }
 
     /**
@@ -78,8 +172,49 @@ class ContentController extends Controller
      * @param  \App\Content  $content
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Content $content)
+    public function destroy($id)
     {
-        //
+        $content = Content::find($id);
+
+        if ($content->delete())
+        {
+            if (!empty($content->image))
+            {
+                if (file_exists(public_path('img/upload/content/'. $content->image)))
+                {
+                    unlink(public_path('img/upload/content/'. $content->image));
+
+                    Session::flash('success', 'Đã xoá thành công ');
+
+                    return response()->json(200);
+                }
+                else
+                {
+                    Session::flash('success', 'Đã xoá thành công ');
+
+                    return response()->json(200);
+                }
+            }
+        }
+        else
+        {
+            return back()->with('error', 'Có lỗi xảy ra, vui lòng thử lại .');
+        }
+    }
+
+    public function delAll(Request $request)
+    {
+        $idContent = $request->input('idContents');
+
+        if (!empty($idContent))
+        {
+            Content::whereIn('id', $idContent)->delete();
+
+            return redirect()->route('contents.index')->with('success', 'Đã xoá thành công bài viết ');
+        }
+        else
+        {
+            return back()->with('error', 'Bạn cần phãi chọn dữ liệu cần xoá !');
+        }  
     }
 }

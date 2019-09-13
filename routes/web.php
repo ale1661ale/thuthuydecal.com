@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('client.layouts.master');
 });
 
 Route::get('thuthuy/login','AdminLoginController@getLogin')->name('login.admin');
@@ -46,6 +46,17 @@ Route::group(['prefix' => 'thuthuy','middleware' => 'CheckAdminLogin'], function
     Route::get('admis/{id}/details', 'AdminController@edit')->name('admins.edit');
     Route::post('admis/{id}/details', 'AdminController@update')->name('admins.update');
     Route::post('admins/changepassword','AdminController@changePassword')->name('admins.changePassword');
+
+    Route::resource('content-types', 'ContentTypeController');
+    Route::post('content-types/del', 'ContentTypeController@delAll')->name('content-types.delAll');
+
+    Route::resource('contents', 'ContentController');
+    Route::post('contents/del', 'ContentController@delAll')->name('contents.delAll');
+    Route::post('contents/{id}', 'ContentController@update')->name('contents.update');
+
+    Route::resource('ales', 'AleController');
+    Route::post('ales/del', 'AleController@delAll')->name('ales.delAll');
+    Route::post('update-ales/{id}','AleController@update');
 });
 
 Route::get('get-product-type','AjaxController@getProductType');

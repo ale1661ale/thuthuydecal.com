@@ -48,8 +48,8 @@
      <div class="signpanel-wrapper">
         <div class="signbox">
             <div class="signbox-header">
-                <h4>katniss</h4>
-                <p class="mg-b-0">Responsive Bootstrap 4 Admin Template</p>
+                <h4>Thuthuy</h4>
+                <p class="mg-b-0">Have a nice day ^.^</p>
             </div>
             <!-- signbox-header -->
             
@@ -58,22 +58,22 @@
                 <div class="signbox-body">
                     <div class="form-group">
                         <label class="form-control-label">Email:</label>
-                        <input type="email" name="email" placeholder="Enter your email" class="form-control">
+                        <input type="email" name="email" placeholder="Nhập email..." class="form-control">
                     </div>
                     <!-- form-group -->
 
                     <div class="form-group">
                         <label class="form-control-label">Password:</label>
-                        <input type="password" name="password" placeholder="Enter your password" class="form-control">
+                        <input type="password" name="password" placeholder="Nhập mật khẩu..." class="form-control">
                     </div>
                     <!-- form-group -->
 
                     <div class="form-group">
-                        <a href="">Forgot password?</a>
+                        <a href="">Quên mật khẩu ?</a>
                     </div>
                     <!-- form-group -->
 
-                    <button type="submit" class="btn btn-dark btn-block">Sign In</button>
+                    <button type="submit" class="btn btn-dark btn-block">Đăng nhập</button>
             
                 </div>
                 <!-- signbox-body -->

@@ -29,7 +29,7 @@
     <meta name="author" content="ThemePixels">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <base href="{{ asset('') }}">
-    <title>Admin - @yield('title')</title>
+    <title>Admin ~ @yield('title')</title>
 
     <!-- vendor css -->
     <link href="assets/thuthuy/lib/font-awesome/css/font-awesome.css" rel="stylesheet">

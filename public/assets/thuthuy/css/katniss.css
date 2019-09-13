@@ -199,6 +199,10 @@ abbr[data-original-title] {
   border-bottom: 0;
 }
 /* ale css */
+a.client-browser {
+  font-size: 22px;
+  color: white;
+}
 .imageThumb
 {
   margin-left:12px;
@@ -5037,7 +5041,7 @@ a.bg-dark:focus, a.bg-dark:hover {
 }
 
 .rounded-circle {
-  border-radius: 50%;
+  border-radius: 39%;
 }
 
 .rounded-0 {

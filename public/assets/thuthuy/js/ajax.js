@@ -384,6 +384,196 @@ $(document).ready(function(){
 			});
 		});
 
+		//show edit content type form
+	$('.editContentType').click(function(){
+
+		let id = $(this).data('id');
+		
+		//alert(id);
+		
+		$.ajax({
+			url : 'thuthuy/content-types/' + id + '/edit',
+
+			dataType : 'json',
+
+			type : 'get',
+
+			success : function (data)
+			{
+				$('.name').val(data.name);
+
+				$('.contentTypeName').text(data.name);
+
+				if (data.status == 1)
+				{
+					$('.hien').attr('selected','selected');
+					$('.an').removeAttr('selected','selected');
+				}
+				else
+				{
+					$('.an').attr('selected','selected');
+					$('.hien').removeAttr('selected','selected');
+				}
+			}
+		});
+		//update content type
+		$('.updateContentType').click(function(){
+
+			let name = $('.name').val();
+
+			let status = $('.status').val();
+
+			$.ajax({
+				url : 'thuthuy/content-types/' +id,
+
+				dataType : 'json',
+
+				data : 
+				{
+					name : name,
+					status : status,
+				},
+
+				type : 'put',
+				success : function (data) 
+				{
+					if (data.error == 'true')
+					{
+						$('.error').show();
+						$('.error').text(data.message.name[0]);
+					}
+					else
+					{
+						$('#editContentType').modal('hide');
+						
+                        location.reload();
+					}
+				}
+			});
+		});
+	});
+
+	// delete contents
+	$('.deleteContent').click(function() {
+
+		let id = $(this).data('id');
+
+		$('.delContent').click(function() {
+			$.ajax({
+				url : 'thuthuy/contents/'+id,
+
+				dataType : 'json',
+
+				type : 'delete',
+
+				success : function(data)
+				{
+					location.reload();
+				}
+			});
+		});
+	});
+
+	// show edit ale form
+	$('.editAle').click(function() {
+
+		let id = $(this).data('id');
+
+		//alert(id);
+
+		$('.errorTitle').hide();
+		$('.errorImage').hide();
+
+		$.ajax({
+			
+			url : 'thuthuy/ales/' + id + '/edit',
+
+			dataType : 'json',
+
+			type : 'get',
+
+			success : function(data)
+			{
+				$('.title').val(data.title);
+				$('.key_name').val(data.key_name);
+				$('.description').val(data.description);
+				if (data.status == 1)
+				{
+					$('.hien').attr('selected','selected');
+					$('.an').removeAttr('selected','selected');
+				}
+				else
+				{
+					$('.an').attr('selected','selected');
+					$('.hien').removeAttr('selected','selected');
+				}
+				CKEDITOR.instances['demon'].setData(data.content);
+  				$('.imageThum').attr('src','img/upload/ale/'+data.image);
+			}
+		});
+		$('#updateAle').on('submit',function(event){
+
+			event.preventDefault();
+
+			$.ajax({
+				url : 'thuthuy/update-ales/' +id,
+
+				data : new FormData(this),
+
+				contentType : false,
+
+				processData : false,
+
+				cache : false,
+
+				type : 'post',
+
+				success : function(data){
+					//console.log(data);
+					if (data.error == 'true')
+					{
+						if (data.message.title)
+						{
+							$('.errorTitle').show();
+							$('.errorTitle').text(data.message.title[0]);
+						}
+						if (data.message.image)
+						{
+							$('.errorImage').show();
+							$('.errorImage').text(data.message.image[0]);
+						}
+					}
+					else
+					{
+						location.reload();
+					}
+				}
+			});
+		});
+	});
+
+	// delete ales
+	$('.deleteAle').click(function() {
+
+		let id = $(this).data('id');
+
+		$('.delAle').click(function() {
+
+			$.ajax({
+
+				url : 'thuthuy/ales/' +id,
+				
+				dataType : 'json',
+	
+				type : 'delete',
+	
+				success : function(data)
+				{
+					location.reload();
+				}
+			});
+		});
+	});
 		
 
 

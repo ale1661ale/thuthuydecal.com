@@ -18,7 +18,7 @@ class IntroduceController extends Controller
      */
     public function index()
     {
-        $intro = Introduce::paginate(10);
+        $intro = Introduce::orderBy('created_at', 'desc')->paginate(10);
 
         return view('thuthuy.pages.introduces.index', compact('intro'));
     }
@@ -185,14 +185,13 @@ class IntroduceController extends Controller
 
                     return response()->json(200);
                 }
-            }
-            else
-            {
-                Session::flash('success', 'Đã xoá thành công ');
+                else
+                {
+                    Session::flash('success', 'Đã xoá thành công ');
 
-                return response()->json(200);
+                    return response()->json(200);
+                }
             }
-            
         }
         else
         {
