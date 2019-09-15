@@ -31,31 +31,35 @@
 
         <li class="nav-item">
             <a href="" class="nav-link with-sub">
-            <i class="ionicons ion-social-buffer-outline"></i>
-            <span>Nội dung</span>
+                <i class="ionicons ion-social-buffer-outline"></i>
+                <span>Nội dung</span>
             </a>
             <ul class="nav-sub">
-            <li class="nav-item"><a href="{{ route('content-types.index') }}" class="nav-link">Thể loại nội dung</a></li>
-            <li class="nav-item"><a href="{{ route('contents.index') }}" class="nav-link">Danh sách nội dung</a></li>
+                <li class="nav-item"><a href="{{ route('content-types.index') }}" class="nav-link">Thể loại nội dung</a></li>
+                <li class="nav-item"><a href="{{ route('contents.index') }}" class="nav-link">Danh sách nội dung</a></li>
             </ul>
         </li><!-- nav-item -->
 
         <li class="nav-item">
             <a href="" class="nav-link with-sub">
-            <i class="ionicons ion-android-contact"></i>
-            <span>Khách hàng liên hệ</span>
+                <i class="ionicons ion-android-contact"></i>
+                <span>Khách hàng liên hệ</span>
             </a>
             <ul class="nav-sub">
-            <li class="nav-item"><a href="table-basic.html" class="nav-link">Basic Table</a></li>
-            <li class="nav-item"><a href="table-datatable.html" class="nav-link">Data Table</a></li>
+                <li class="nav-item"><a href="table-basic.html" class="nav-link">Basic Table</a></li>
+                <li class="nav-item"><a href="table-datatable.html" class="nav-link">Data Table</a></li>
             </ul>
         </li><!-- nav-item -->
 
         <li class="nav-item">
-            <a href="{{ route('ales.index') }}" class="nav-link">
-            <i class="ionicons ion-beer"></i>
-            <span>Thông tin chung</span>
+            <a href="" class="nav-link with-sub">
+                <i class="ionicons ion-beer"></i>
+                <span>Thông tin chung</span>
             </a>
+            <ul class="nav-sub">
+                <li class="nav-item"><a href="{{ route('image-types.index') }}" class="nav-link">Thể loại ảnh</a></li>
+                <li class="nav-item"><a href="{{ route('ales.index') }}" class="nav-link">Thông tin trong website</a></li>
+            </ul>
         </li><!-- nav-item -->
 
     </ul>

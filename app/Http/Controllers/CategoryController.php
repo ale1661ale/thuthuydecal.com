@@ -42,6 +42,7 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         $data = $request->all();
+
         $data['slug'] = Str::slug($request->input('name'));
 
         if($request->get('create') == 'one') 
@@ -51,7 +52,8 @@ class CategoryController extends Controller
             return redirect()->route('categories.index')->with('success', 'Tạo mới thành công danh mục '.$request->name);
     
         } 
-        else if($request->get('create') == 'more') {
+        else if($request->get('create') == 'more') 
+        {
     
             Category::create($data);
 

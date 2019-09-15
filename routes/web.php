@@ -57,6 +57,20 @@ Route::group(['prefix' => 'thuthuy','middleware' => 'CheckAdminLogin'], function
     Route::resource('ales', 'AleController');
     Route::post('ales/del', 'AleController@delAll')->name('ales.delAll');
     Route::post('update-ales/{id}','AleController@update');
+
+    Route::resource('image-types', 'ImageTypeController');
+
+    Route::resource('logos', 'LogoController');
+    Route::post('logos/del', 'LogoController@delAll')->name('logos.delAll');
+    Route::post('update-logos/{id}','LogoController@update');
+
+    Route::resource('banners', 'BannerController');
+    Route::post('banners/del', 'BannerController@delAll')->name('banners.delAll');
+    Route::post('update-banners/{id}','BannerController@update');
+
+    Route::resource('slides', 'SlideController');
+    Route::post('slides/del', 'SlideController@delAll')->name('slides.delAll');
+    Route::post('update-slides/{id}','SlideController@update');
 });
 
 Route::get('get-product-type','AjaxController@getProductType');

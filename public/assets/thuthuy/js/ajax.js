@@ -574,6 +574,347 @@ $(document).ready(function(){
 			});
 		});
 	});
+
+	// delete image types
+	$('.deleteImageType').click(function() {
+
+		let id = $(this).data('id');
+
+		$('.delImageType').click(function() {
+
+			$.ajax({
+
+				url : 'thuthuy/image-types/' +id,
+				
+				dataType : 'json',
+	
+				type : 'delete',
+	
+				success : function(data)
+				{
+					location.reload();
+				}
+			});
+		});
+	});
+
+
+	$('#back').on('click', function(event) {
+
+		event.preventDefault();
+		
+		history.go(-1);
+	});
+
+	// show edit logo form
+
+	$('.editLogo').click(function() {
+
+		let id = $(this).data('id');
+
+
+		$('.errorName').hide();
+		$('.errorImage').hide();
+
+		$.ajax({
+
+			url : 'thuthuy/logos/' +id+ '/edit',
+
+			dataType : 'json',
+
+			type : 'get',
+
+			success : function(data)
+			{
+				$('.name').val(data.name);
+				$('.link').val(data.link);
+				$('.imageThum').attr('title', data.name);
+				$('.description').val(data.description);
+				if (data.status == 1)
+				{
+					$('.hien').attr('selected','selected');
+					$('.an').removeAttr('selected','selected');
+				}
+				else
+				{
+					$('.an').attr('selected','selected');
+					$('.hien').removeAttr('selected','selected');
+				}
+  				$('.imageThum').attr('src','img/upload/ale/'+data.image);
+			}
+		});
+		$('#updateLogo').on('submit',function(event){
+
+			event.preventDefault();
+
+			$.ajax({
+				url : 'thuthuy/update-logos/' +id,
+
+				data : new FormData(this),
+
+				contentType : false,
+
+				processData : false,
+
+				cache : false,
+
+				type : 'post',
+
+				success : function(data)
+				{
+					console.log(data);
+					if (data.error == 'true')
+					{
+						if (data.message.name)
+						{
+							$('.errorName').show();
+							$('.errorName').text(data.message.name[0]);
+						}
+						if (data.message.image)
+						{
+							$('.errorImage').show();
+							$('.errorImage').text(data.message.image[0]);
+						}
+					}
+					else
+					{
+						location.reload();
+					}
+				}
+			});
+		});
+	});
+
+
+	// delete logos
+	$('.deleteLogo').click(function() {
+
+		let id = $(this).data('id');
+
+		$('.delLogo').click(function() {
+
+			$.ajax({
+
+				url : 'thuthuy/logos/' +id,
+				
+				dataType : 'json',
+	
+				type : 'delete',
+	
+				success : function(data)
+				{
+					location.reload();
+				}
+			});
+		});
+	});
+
+	// show edit banner form
+
+	$('.editBanner').click(function() {
+
+		let id = $(this).data('id');
+
+
+		$('.errorName').hide();
+		$('.errorImage').hide();
+
+		$.ajax({
+
+			url : 'thuthuy/banners/' +id+ '/edit',
+
+			dataType : 'json',
+
+			type : 'get',
+
+			success : function(data)
+			{
+				$('.name').val(data.name);
+				$('.link').val(data.link);
+				$('.imageThum').attr('title', data.name);
+				$('.description').val(data.description);
+				if (data.status == 1)
+				{
+					$('.hien').attr('selected','selected');
+					$('.an').removeAttr('selected','selected');
+				}
+				else
+				{
+					$('.an').attr('selected','selected');
+					$('.hien').removeAttr('selected','selected');
+				}
+  				$('.imageThum').attr('src','img/upload/ale/'+data.image);
+			}
+		});
+		$('#updateBanner').on('submit',function(event){
+
+			event.preventDefault();
+
+			$.ajax({
+				url : 'thuthuy/update-banners/' +id,
+
+				data : new FormData(this),
+
+				contentType : false,
+
+				processData : false,
+
+				cache : false,
+
+				type : 'post',
+
+				success : function(data)
+				{
+					console.log(data);
+					if (data.error == 'true')
+					{
+						if (data.message.name)
+						{
+							$('.errorName').show();
+							$('.errorName').text(data.message.name[0]);
+						}
+						if (data.message.image)
+						{
+							$('.errorImage').show();
+							$('.errorImage').text(data.message.image[0]);
+						}
+					}
+					else
+					{
+						location.reload();
+					}
+				}
+			});
+		});
+	});
+
+
+	// delete banners
+	$('.deleteBanner').click(function() {
+
+		let id = $(this).data('id');
+
+		$('.delBanner').click(function() {
+
+			$.ajax({
+
+				url : 'thuthuy/banners/' +id,
+				
+				dataType : 'json',
+	
+				type : 'delete',
+	
+				success : function(data)
+				{
+					location.reload();
+				}
+			});
+		});
+	});
+
+	// show edit slide form
+
+	$('.editSlide').click(function() {
+
+		let id = $(this).data('id');
+
+
+		$('.errorName').hide();
+		$('.errorImage').hide();
+
+		$.ajax({
+
+			url : 'thuthuy/slides/' +id+ '/edit',
+
+			dataType : 'json',
+
+			type : 'get',
+
+			success : function(data)
+			{
+				$('.name').val(data.name);
+				$('.link').val(data.link);
+				$('.imageThum').attr('title', data.name);
+				$('.description').val(data.description);
+				if (data.status == 1)
+				{
+					$('.hien').attr('selected','selected');
+					$('.an').removeAttr('selected','selected');
+				}
+				else
+				{
+					$('.an').attr('selected','selected');
+					$('.hien').removeAttr('selected','selected');
+				}
+  				$('.imageThum').attr('src','img/upload/ale/'+data.image);
+			}
+		});
+		$('#updateSlide').on('submit',function(event){
+
+			event.preventDefault();
+
+			$.ajax({
+				url : 'thuthuy/update-slides/' +id,
+
+				data : new FormData(this),
+
+				contentType : false,
+
+				processData : false,
+
+				cache : false,
+
+				type : 'post',
+
+				success : function(data)
+				{
+					//console.log(data);
+					if (data.error == 'true')
+					{
+						if (data.message.name)
+						{
+							$('.errorName').show();
+							$('.errorName').text(data.message.name[0]);
+						}
+						if (data.message.image)
+						{
+							$('.errorImage').show();
+							$('.errorImage').text(data.message.image[0]);
+						}
+					}
+					else
+					{
+						location.reload();
+					}
+				}
+			});
+		});
+	});
+
+
+	// delete slides
+	$('.deleteSlide').click(function() {
+
+		let id = $(this).data('id');
+
+		$('.delSlide').click(function() {
+
+			$.ajax({
+
+				url : 'thuthuy/slides/' +id,
+				
+				dataType : 'json',
+	
+				type : 'delete',
+	
+				success : function(data)
+				{
+					location.reload();
+				}
+			});
+		});
+	});
+
 		
 
 

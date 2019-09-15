@@ -107,6 +107,7 @@ class ContentController extends Controller
     public function edit($id)
     {
         $content_type = Content_Type::where('status',1)->get();
+        
         $content = Content::find($id);
 
         return view('thuthuy.pages.contents.detail', compact('content', 'content_type'));

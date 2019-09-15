@@ -59,6 +59,10 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
+        $category = Category::where('status', 1)->get();
+
+        $productType = Product_Type::where('status', 1)->get();
+
         if($request->hasFile('image'))
         {
             $file = $request->image;
@@ -83,9 +87,20 @@ class ProductController extends Controller
                         $data['key_word'] = $request->input('name').','.Str::slug($request->input('name'));
                         $data['content'] = $request->input('content');
 
-                        Product::create($data);
+                        if ($request->get('create') == 'one')
+                        {
+                            Product::create($data);
 
-                        return redirect()->route('products.index')->with('success','Đã thêm thành công '.$request->name);
+                            return redirect()->route('products.index')->with('success','Đã thêm thành công '.$request->name);
+                        }
+                        elseif ($request->get('create') == 'more')
+                        {
+                            Product::create($data);
+
+                            Session::flash('success', 'Thêm mới thành công ');
+
+                            return view('thuthuy.pages.products.create', compact('category', 'productType'));
+                        }
                     }
                 }
                 else
@@ -104,9 +119,20 @@ class ProductController extends Controller
         $data['key_word'] = $request->input('name').','.Str::slug($request->input('name'));
         $data['content'] = $request->input('content');
 
-        Product::create($data);
+        if ($request->get('create') == 'one')
+        {
+            Product::create($data);
 
-        return redirect()->route('products.index')->with('success','Đã thêm thành công '.$request->name);
+            return redirect()->route('products.index')->with('success','Đã thêm thành công '.$request->name);
+        }
+        elseif ($request->get('create') == 'more')
+        {
+            Product::create($data);
+
+            Session::flash('success', 'Thêm mới thành công ');
+
+            return view('thuthuy.pages.products.create', compact('category', 'productType'));
+        }
     }
 
     /**
