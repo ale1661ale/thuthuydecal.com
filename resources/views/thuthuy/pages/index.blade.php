@@ -9,26 +9,13 @@
         <div class="row row-sm">
             <div class="col-lg-12">
                 <div class="row row-sm">
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-body pd-b-0">
-                                <h6 class="card-body-title tx-12 tx-spacing-2 mg-b-20 tx-success">Page Impressions</h6>
-                                <h2 class="tx-lato tx-inverse">323,360</h2>
-                                <p class="tx-12"><span class="tx-success">2.5%</span> change from yesterday</p>
-                            </div>
-                            <!-- card-body -->
-                            <div id="rs1" class="ht-50 ht-sm-70 mg-r--1"></div>
-                        </div>
-                        <!-- card -->
-                    </div>
-                    <!-- col-4 -->
 
-                    <div class="col-lg-4">
-                        <div class="card">
+                <div class="col-lg-4">
+                        <div class="card" style="background-color:#c73046;">
                             <div class="card-body pd-b-0">
-                                <h6 class="card-body-title tx-12 tx-spacing-2 mg-b-20 tx-danger">Page Impressions</h6>
+                                <h5 class="card-body-title tx-15 tx-spacing-2 mg-b-20 tx-default">Page Impressions</h5>
                                 <h2 class="tx-lato tx-inverse">674,221</h2>
-                                <p class="tx-12"><span class="tx-success">2.5%</span> change from yesterday</p>
+                                <p class="tx-13 tx-white">change from yesterday</p>
                             </div>
                             <!-- card-body -->
                             <div id="rs2" class="ht-50 ht-sm-70 mg-r--1"></div>
@@ -38,11 +25,25 @@
                     <!-- col-4 -->
 
                     <div class="col-lg-4">
-                        <div class="card">
+                        <div class="card" style="background-color:#33914c;">
                             <div class="card-body pd-b-0">
-                                <h6 class="card-body-title tx-12 tx-spacing-2 mg-b-20 tx-danger">Page Impressions</h6>
+                                <h5 class="card-body-title tx-15 tx-spacing-2 mg-b-20 tx-default">Page Impressions</h5>
+                                <h2 class="tx-lato tx-inverse">323,360</h2>
+                                <p class="tx-13 tx-white">change from yesterday</p>
+                            </div>
+                            <!-- card-body -->
+                            <div id="rs1" class="ht-50 ht-sm-70 mg-r--1"></div>
+                        </div>
+                        <!-- card -->
+                    </div>
+                    <!-- col-4 -->
+
+                    <div class="col-lg-4">
+                        <div class="card" style="background-color:#309ac7;">
+                            <div class="card-body pd-b-0">
+                                <h5 class="card-body-title tx-15 tx-spacing-2 mg-b-20 tx-default">Page Impressions</h5>
                                 <h2 class="tx-lato tx-inverse">674,221</h2>
-                                <p class="tx-12"><span class="tx-success">2.5%</span> change from yesterday</p>
+                                <p class="tx-13 tx-white">change from yesterday</p>
                             </div>
                             <!-- card-body -->
                             <div id="rs2" class="ht-50 ht-sm-70 mg-r--1"></div>

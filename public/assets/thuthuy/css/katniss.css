@@ -199,6 +199,10 @@ abbr[data-original-title] {
   border-bottom: 0;
 }
 /* ale css */
+.tx-default 
+{
+  color : black !important;
+}
 a.client-browser {
   font-size: 22px;
   color: white;
@@ -45572,8 +45576,12 @@ a.hover-white-8:hover, a.hover-white-8:focus {
   color: #17a2b8;
 }
 
+.tx-white {
+  color : white;
+}
+
 .tx-inverse {
-  color: #343a40;
+  color: black;
 }
 
 .tx-teal {

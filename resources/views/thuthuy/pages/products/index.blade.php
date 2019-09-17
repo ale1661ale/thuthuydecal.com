@@ -91,7 +91,12 @@
             <form action="{{ route('products.search')}}" method="post" role="search">
                 @csrf
                 <div class="input-group">
-                    <input class="thuthuy-search" type="text" name="search" placeholder="Search..">
+                    <input 
+                        class="thuthuy-search" 
+                        type="text" name="search" 
+                        placeholder="Tìm kiếm theo tên sp.."
+                        style="width:200px;padding:5px;"
+                    >
                     <button type="submit" class="btn btn-search">
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </button>

@@ -34,7 +34,7 @@
 
                 <div class="col-lg-12">
                     <div class="form-group">
-                        <label class="form-control-label">Hình ảnh: </label>
+                        <label class="form-control-label">Hình ảnh : (Tốt nhất 1665x800) </label>
                         <input class="form-control" type="file" name="image">
                         @if($errors->has('image'))
                             <div class="alert alert-danger">{{ $errors->first('image') }}</div>
@@ -50,6 +50,17 @@
                     </div>
                 </div>
                 <!-- col-12 -->
+
+                <div class="col-lg-12">
+                <div class="form-group">
+                    <label class="form-control-label">Nội dung: </label>
+                    <textarea class="form-control content" rows="10" cols="10" name="content" id="demon"></textarea>
+                    @if($errors->has('content'))
+                        <div class="alert alert-danger">{{ $errors->first('content') }}</div>
+                    @endif
+                </div>
+            </div>
+            <!-- col-12 -->
 
                 <div class="col-lg-6">
                     <div class="form-group mg-b-10-force">

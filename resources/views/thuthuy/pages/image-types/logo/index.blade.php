@@ -41,6 +41,7 @@
                     <th>STT</th>
                     <th>Tên</th>
                     <th>Hình ảnh</th>
+                    <th>Col_val</th>
                     <th>Tình trạng</th>
                     <th>Tạo vào lúc</th>
                     <th>Hành động</th>
@@ -71,6 +72,14 @@
                             <img src="img/upload/ale/{{ $value->image }}" width="210" 
                             height="130" 
                             alt="{{ $value->name }}">
+                        </td>
+
+                        <td>
+                            @if($value->id_image_type == 1)
+                                Logo thuthuy
+                            @else
+                                Logo đối tác
+                            @endif
                         </td>
 
                         <td>
@@ -153,6 +162,14 @@
                                 name="description"
                             >
                         </fieldset>
+
+                        <div class="form-group">
+                            <label>Col_val :</label>
+                            <select class="form-control id_image_type" name="id_image_type">
+                                <option value="1" class="logo">logo thuthuy</option>
+                                <option value="0" class="doitac">logo đối tác</option>
+                            </select>
+                        </div>
                         
                         <div class="form-group">
                             <label>Tình trạng :</label>

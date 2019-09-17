@@ -103,7 +103,7 @@
 <!-- edit modal -->
 <div class="modal fade" id="editAle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content" style="width:600px">
+        <div class="modal-content" style="width:700px">
             <div class="modal-header">
 
                 <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa 

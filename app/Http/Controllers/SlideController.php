@@ -47,6 +47,7 @@ class SlideController extends Controller
         $data = $request->all();
 
         $data['slug'] = Str::slug($request->input('name'));
+        $data['content'] = Str::limit(trim(strip_tags($request->input('content'))), 1000);
 
         if($request->hasFile('image'))
         {
@@ -140,6 +141,7 @@ class SlideController extends Controller
         $data = $request->all();
 
         $data['slug'] = Str::slug($request->input('name'));
+        $data['content'] = Str::limit(trim(strip_tags($request->input('content'))), 1000);
 
         if ($request->hasFile('image'))
         {

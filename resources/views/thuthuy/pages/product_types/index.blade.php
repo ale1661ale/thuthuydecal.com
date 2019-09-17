@@ -31,7 +31,9 @@
                         <td>
                             <input type="checkbox" class="checkbox" value="{{ $value->id }}" name="idProTypes[]">
                         </td>
+
                         <td>{{ $key+1 }}</td>
+
                         <td>
                             <a href="javscript:void(0)"
                             title="{{ 'Edit '.$value->name }}"
@@ -41,7 +43,9 @@
                             data-id="{{ $value->id }}">{{ $value->name }}
                             </a>
                         </td>
+
                         <td>{{ $value->Category->name }}</td>
+
                         <td>
                             @if ($value->hot == 0)
                                 Thể loại thường
@@ -49,6 +53,7 @@
                                 Thể loại nổi bật
                             @endif
                         </td>
+
                         <td>
                             @if($value->status == 1)
                                 Hiện
@@ -56,7 +61,9 @@
                                 Ẩn
                             @endif
                         </td>
+
                         <td>{{ $value->created_at }}</td>
+
                         <td>
                             <a href="javascript:void(0)" data-toggle="modal" 
                                 data-target="#deleteProType" class="deleteProductType"
@@ -84,7 +91,12 @@
                 <form action="{{ route('product-types.search')}}" method="post" role="search">
                     @csrf
                     <div class="input-group">
-                        <input class="thuthuy-search" type="text" name="search" placeholder="Search..">
+                        <input 
+                            class="thuthuy-search" 
+                            type="text" name="search" 
+                            placeholder="Tìm kiếm theo tên thể loại.."
+                            style="width:200px;padding:5px;"
+                        >
                         <button type="submit" class="btn btn-search">
                             <i class="fa fa-search" aria-hidden="true"></i>
                         </button>
@@ -123,8 +135,11 @@
                             <td>
                                 <input type="checkbox" class="checkbox" value="{{ $value->id }}" name="idProTypes[]">
                             </td>
+
                             <td>{{ $key+1 }}</td>
+
                             <td>
+
                                 <a href="javscript:void(0)"
                                 title="{{ 'Edit '.$value->name }}"
                                 class="editProType"
@@ -133,7 +148,13 @@
                                 data-id="{{ $value->id }}">{{ $value->name }}
                                 </a>
                             </td>
-                            <td>{{ $value->Category->name }}</td>
+
+                            <td>
+                                <a href="thuthuy/product-types/{{ $value->Category->id }}/list" style="color:#ba0645;">
+                                    {{ $value->Category->name }}
+                                </a>
+                            </td>
+
                             <td>
                                 @if ($value->hot == 0)
                                     Thể loại thường
@@ -141,6 +162,7 @@
                                     Thể loại nổi bật
                                 @endif
                             </td>
+
                             <td>
                                 @if($value->status == 1)
                                     Hiện
@@ -148,7 +170,9 @@
                                     Ẩn
                                 @endif
                             </td>
+
                             <td>{{ $value->created_at }}</td>
+
                             <td>
                                 <a href="javascript:void(0)" data-toggle="modal" 
                                 data-target="#deleteProType" class="deleteProductType"

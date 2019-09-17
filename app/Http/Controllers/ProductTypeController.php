@@ -187,5 +187,14 @@ class ProductTypeController extends Controller
             return redirect()->route('product-types.index')->with('error', 'Không tìm thấy kết quả tìm kiếm');
         }
     }
+    
+    public function listProductType($id_cate)
+    {
+        $idCate = Category::where('id', $id_cate)->value('id');
+
+        $productType = Product_Type::where('id_cate', $idCate)->paginate(15);
+
+        return view('thuthuy.pages.product_types.index', compact('productType'));
+    }
 
 }

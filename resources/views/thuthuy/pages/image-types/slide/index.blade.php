@@ -153,6 +153,12 @@
                                 name="description"
                             >
                         </fieldset>
+
+                        <fieldset class="form-group">
+                            <label class="form-control-label">Nội dung: </label>
+                            <textarea class="form-control content" rows="10" cols="10" name="content" id="demon">
+                            </textarea>
+                        </fieldset>
                         
                         <div class="form-group">
                             <label>Tình trạng :</label>

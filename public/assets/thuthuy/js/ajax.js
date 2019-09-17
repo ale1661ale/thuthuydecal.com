@@ -173,7 +173,6 @@ $(document).ready(function(){
 					type : 'put',
 					success : function(data)
 					{
-						console.log(data);
 						if (data.error == 'true')
 						{
 							$('.errorName').text(data.message.name[0])
@@ -627,9 +626,13 @@ $(document).ready(function(){
 			success : function(data)
 			{
 				$('.name').val(data.name);
+
 				$('.link').val(data.link);
+
 				$('.imageThum').attr('title', data.name);
+
 				$('.description').val(data.description);
+
 				if (data.status == 1)
 				{
 					$('.hien').attr('selected','selected');
@@ -640,6 +643,18 @@ $(document).ready(function(){
 					$('.an').attr('selected','selected');
 					$('.hien').removeAttr('selected','selected');
 				}
+
+				if (data.id_image_type == 1)
+				{
+					$('.logo').attr('selected','selected');
+					$('.doitac').removeAttr('selected','selected');
+				}
+				else
+				{
+					$('.doitac').attr('selected','selected');
+					$('.logo').removeAttr('selected','selected');
+				}
+
   				$('.imageThum').attr('src','img/upload/ale/'+data.image);
 			}
 		});
@@ -730,6 +745,7 @@ $(document).ready(function(){
 			success : function(data)
 			{
 				$('.name').val(data.name);
+				$('.slug').val(data.slug);
 				$('.link').val(data.link);
 				$('.imageThum').attr('title', data.name);
 				$('.description').val(data.description);
@@ -836,6 +852,7 @@ $(document).ready(function(){
 				$('.link').val(data.link);
 				$('.imageThum').attr('title', data.name);
 				$('.description').val(data.description);
+				CKEDITOR.instances['demon'].setData(data.content);
 				if (data.status == 1)
 				{
 					$('.hien').attr('selected','selected');

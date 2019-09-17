@@ -59,7 +59,7 @@
 
             <div class="col-lg-8">
                 <div class="form-group">
-                    <label class="form-control-label">Ảnh minh hoạ: </label>
+                    <label class="form-control-label">Ảnh minh hoạ: ( 318x318 )</label>
                     <input class="form-control image" type="file" name="image">
                     @if($errors->has('image'))
                         <div class="alert alert-danger">{{ $errors->first('image') }}</div>

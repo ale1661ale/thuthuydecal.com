@@ -34,7 +34,7 @@
 
                 <div class="col-lg-12">
                     <div class="form-group">
-                        <label class="form-control-label">Hình ảnh: </label>
+                        <label class="form-control-label">Hình ảnh : ( 170x80 là tốt nhất ) </label>
                         <input class="form-control" type="file" name="image">
                         @if($errors->has('image'))
                             <div class="alert alert-danger">{{ $errors->first('image') }}</div>
@@ -50,6 +50,17 @@
                     </div>
                 </div>
                 <!-- col-12 -->
+
+                <div class="col-lg-6">
+                    <div class="form-group mg-b-10-force">
+                        <label class="form-control-label">Col_val: </label>
+                        <select class="form-control" name="id_image_type">
+                            <option value="1" class="logo">Logo thuthuy</option>
+                            <option value="0" class="doitac">Logo đối tác</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- col-6 -->
 
                 <div class="col-lg-6">
                     <div class="form-group mg-b-10-force">

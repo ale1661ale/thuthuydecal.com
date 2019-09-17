@@ -40,6 +40,7 @@
                     <th><input type="checkbox" id="check_all"></th>
                     <th>STT</th>
                     <th>Tên</th>
+                    <th>Key_name</th>
                     <th>Hình ảnh</th>
                     <th>Tình trạng</th>
                     <th>Tạo vào lúc</th>
@@ -66,6 +67,8 @@
                                 {{ $value->name }}
                             </a>
                         </td>
+
+                        <td style="color:#ba0645;">{{ $value->slug }}</td>
 
                         <td>
                             <img src="img/upload/ale/{{ $value->image }}" width="210" 
@@ -126,6 +129,11 @@
                                 name="name"
                             >
                             <div class="alert alert-danger errorName"></div>
+                        </fieldset>
+
+                        <fieldset class="form-group">
+                            <label>Key_name :</label>
+                            <input class="form-control slug" readonly>
                         </fieldset>
 
                         <fieldset class="form-group">

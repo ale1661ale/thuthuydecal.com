@@ -116,15 +116,21 @@
 <div class="modal fade" id="deleteCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action="{{ route('categories.destroy', $category[0]->id) }}" method="post">
+            @foreach($category as $v)
+            <form action="{{ route('categories.destroy', $v->id ) }}" method="post">
+            @endforeach
+
                 @method('delete')
+
                 @csrf
+
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Bạn có muốn xóa <span class="categoryName">{{ $category[0]->name }}</span></h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Bạn có muốn xóa </h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
+
                 <div class="modal-body" style="margin-left: 183px;">
                     <button type="submit" class="btn btn-success delCategory">Có</button>
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Không</button>

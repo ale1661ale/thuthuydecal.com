@@ -34,7 +34,7 @@
 
                 <div class="col-lg-12">
                     <div class="form-group">
-                        <label class="form-control-label">Hình ảnh: </label>
+                        <label class="form-control-label">Hình ảnh :</label>
                         <input class="form-control" type="file" name="image">
                         @if($errors->has('image'))
                             <div class="alert alert-danger">{{ $errors->first('image') }}</div>

@@ -9,7 +9,7 @@ class slide extends Model
     protected $table = 'slides';
 
     protected $fillable = [
-        'id', 'name', 'slug', 'link', 'image', 'description', 'status', 'id_image_type',
+        'id', 'name', 'slug', 'link', 'image', 'description', 'content', 'status', 'id_image_type',
     ];
 
     public function imageType()
