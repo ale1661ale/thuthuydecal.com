@@ -932,6 +932,29 @@ $(document).ready(function(){
 		});
 	});
 
+	// delete messages
+	$('.deleteMessage').click(function() {
+
+		let id = $(this).data('id');
+
+		$('.delMessage').click(function() {
+
+			$.ajax({
+
+				url : 'thuthuy/customer-messages/' +id,
+				
+				dataType : 'json',
+	
+				type : 'delete',
+	
+				success : function(data)
+				{
+					location.reload();
+				}
+			});
+		});
+	});
+
 		
 
 

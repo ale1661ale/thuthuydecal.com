@@ -67,6 +67,8 @@
 
     @yield('banner-top')
 
+    @include('flash_message')
+
     @yield('content')
     
     @include('client.layouts.footer')
@@ -189,6 +191,23 @@
                  $('body').html(data);
             });
        }
+    </script>
+    <script>
+      setTimeout(function(){
+        $(".alert").fadeTo(2000, 500).slideUp(500, function(){
+          $(".alert").slideUp(500);
+        });
+        }); // 5 secs
+    </script>
+    <script type="text/javascript">
+        var x = document.getElementById("count-ti");
+        if($(".count-title")){
+            $(".count-title").find("h2").addClass('count');
+        }
+        $('.count').counterUp({
+            delay: 10,
+            time: 1000
+        });
     </script>
 </body>
 

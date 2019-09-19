@@ -3,13 +3,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Ale, Banner, Category, Content_Type, Content, Image_Type, Introduce, Logo, Product_Type, Product, Slide, User};
+use App\Models\{Ale, Banner, Category, Content_Type, Content, Image_Type, Introduce, Logo, Product_Type, Product, Slide, User, CustomerMessage};
 use Illuminate\Support\Str;
 use Validator;
 use File;
 use Merge;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use App\Http\Requests\CustomerMessageRequest;
 use Illuminate\Http\Request;
 
 
@@ -69,4 +70,15 @@ class HomeController extends Controller
     {
         return view('client.pages.index');
     }
+
+    public function contact()
+    {
+        return view('client.pages.contact');
+    }
+
+    public function aboutUs()
+    {
+        return view('client.pages.about-us');
+    }
+
 }

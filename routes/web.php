@@ -70,6 +70,9 @@ Route::group(['prefix' => 'thuthuy','middleware' => 'CheckAdminLogin'], function
     Route::resource('slides', 'SlideController');
     Route::post('slides/del', 'SlideController@delAll')->name('slides.delAll');
     Route::post('update-slides/{id}','SlideController@update');
+
+    Route::resource('customer-messages', 'CustomerMessageController');
+    Route::post('customer-messages/del', 'CustomerMessageController@delAll')->name('customer-messages.delAll');
 });
 
 Route::get('get-product-type','AjaxController@getProductType');
@@ -77,6 +80,9 @@ Route::get('get-product-type','AjaxController@getProductType');
 //Client 
 
 Route::get('/','HomeController@index');
+Route::get('contact', 'HomeController@contact')->name('contact.form');
+Route::post('contact', 'CustomerMessageController@store')->name('contact.store');
+Route::get('about-us', 'HomeController@aboutUs')->name('about_us.index');
 
 
 

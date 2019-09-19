@@ -7,8 +7,6 @@
                         <ul>
                             <li class="top-hover"><a href="">Trang chủ</a></li>
 
-                            <li><a href="#">Giới thiệu</a>
-                            </li>
                             @foreach($category as $cate)
                             <li class="mega-menu-position top-hover">
                                 <a href="shop.html">{{ $cate->name }} <i class="ion-chevron-down"></i></a>
@@ -23,7 +21,9 @@
                             </li>
                             @endforeach
 
-                            <li><a href="#">Liên hệ</a></li>
+                            <li><a href="{{ route('about_us.index') }}">Giới thiệu</a></li>
+
+                            <li><a href="{{ route('contact.form') }}">Liên hệ</a></li>
 
                             <li class="top-hover"><a href="">Thiết kế <i class="ion-chevron-down"></i>
                                 <ul class="submenu">

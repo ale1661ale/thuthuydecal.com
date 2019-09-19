@@ -46,7 +46,7 @@
                 <span>Khách hàng liên hệ</span>
             </a>
             <ul class="nav-sub">
-                <li class="nav-item"><a href="table-basic.html" class="nav-link">Basic Table</a></li>
+                <li class="nav-item"><a href="{{ route('customer-messages.index') }}" class="nav-link">Danh sách tin nhắn</a></li>
                 <li class="nav-item"><a href="table-datatable.html" class="nav-link">Data Table</a></li>
             </ul>
         </li><!-- nav-item -->
