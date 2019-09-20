@@ -199,6 +199,10 @@ span.tooltip-content {
     transtion
 ****************************/
 /* ale css */
+.product-img:hover{
+    box-shadow: 0 5px 15px 2px rgba(0, 0, 0, 0.5);
+}
+
 .login-text-content {
     transform: translateY(10px);
 }
@@ -2708,9 +2712,7 @@ product-quantity {
 .modal-pro-content > form {
     margin: 0 0 16px;
 }
-.modal-pro-content > p {
-    margin: 17px 0 0;
-}
+
 .modal-header .close {
     color: #333;
     cursor: pointer;

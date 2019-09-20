@@ -40,7 +40,7 @@
                     <th><input type="checkbox" id="check_all"></th>
                     <th>STT</th>
                     <th>Tên</th>
-                    <th>Key_name</th>
+                    <th>key_name</th>
                     <th>Hình ảnh</th>
                     <th>Tình trạng</th>
                     <th>Tạo vào lúc</th>
@@ -68,7 +68,7 @@
                             </a>
                         </td>
 
-                        <td style="color:#ba0645;">{{ $value->slug }}</td>
+                        <td style="color:#ba0645;">{{ $value->key_name }}</td>
 
                         <td>
                             <img src="img/upload/ale/{{ $value->image }}" width="210" 
@@ -122,7 +122,7 @@
                     <div class="col-lg-12">
 
                         <fieldset class="form-group">
-                            <label>Tên :</label>
+                            <label>Tên : (phãi trùng với tiêu đề bài viết)</label>
                             <input 
                                 class="form-control name" 
                                 placeholder="Nhập tên cần sửa..." 
@@ -133,7 +133,7 @@
 
                         <fieldset class="form-group">
                             <label>Key_name :</label>
-                            <input class="form-control slug" readonly>
+                            <input class="form-control key_name" readonly name="key_name">
                         </fieldset>
 
                         <fieldset class="form-group">

@@ -26,6 +26,17 @@
 
                 <div class="col-lg-12">
                     <div class="form-group">
+                        <label class="form-control-label">Key_name : </label>
+                        <input class="form-control" type="text" name="key_name">
+                        @if($errors->has('key_name'))
+                            <div class="alert alert-danger">{{ $errors->first('key_name') }}</div>
+                        @endif
+                    </div>
+                </div>
+                <!-- col-12 -->
+
+                <div class="col-lg-12">
+                    <div class="form-group">
                         <label class="form-control-label">Link : </label>
                         <input class="form-control" type="text" name="link" placeholder="không cần thiết...">
                     </div>

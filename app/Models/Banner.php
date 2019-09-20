@@ -9,7 +9,7 @@ class banner extends Model
     protected $table = 'banners';
 
     protected $fillable = [
-        'id', 'name', 'slug', 'link', 'image', 'description', 'status', 'id_image_type',
+        'id', 'name', 'slug', 'link', 'image', 'description', 'key_name', 'status', 'id_image_type',
     ];
 
     public function imageType()

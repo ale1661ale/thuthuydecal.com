@@ -127,17 +127,19 @@
 <div class="modal fade" id="deleteContentType" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action="{{ route('content-types.destroy', $content_type[0]->id) }}" method="post">
-
+            @foreach($content_type as $value)
+            <form action="{{ route('content-types.destroy', $value->id) }}" method="post">
+            @endforeach
                 @method('delete')
 
                 @csrf
 
                 <div class="modal-header">
-
+                    @foreach($content_type as $value)
                     <h5 class="modal-title" id="exampleModalLabel">Bạn có muốn xóa 
                         <span>{{ $content_type[0]->name }}</span>
                     </h5>
+                    @endforeach
                     
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>

@@ -83,6 +83,10 @@ Route::get('/','HomeController@index');
 Route::get('contact', 'HomeController@contact')->name('contact.form');
 Route::post('contact', 'CustomerMessageController@store')->name('contact.store');
 Route::get('about-us', 'HomeController@aboutUs')->name('about_us.index');
+Route::get('blogs/{slug}', 'HomeController@blogPage')->name('blogs');
+Route::get('detail/{id}', 'HomeController@ajaxModal');
+Route::get('collections/{slug}', 'HomeController@collection')->name('collections');
+Route::get('collections/{slug}/list', 'HomeController@collectionList')->name('collections.list');
 
 
 

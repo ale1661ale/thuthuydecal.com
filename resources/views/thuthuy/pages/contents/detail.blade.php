@@ -21,7 +21,7 @@
         <div class="row mg-b-25">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <label class="form-control-label">Tiêu đề bài viết: </label>
+                    <label class="form-control-label">Tiêu đề bài viết: (phãi trùng với tên banner) </label>
                     <input class="form-control title" 
                            type="text" 
                            name="title" 

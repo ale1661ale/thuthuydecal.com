@@ -15,7 +15,7 @@
             <div class="row mg-b-25">
                 <div class="col-lg-12">
                     <div class="form-group">
-                        <label class="form-control-label">Tên bài viết: </label>
+                        <label class="form-control-label">Tên bài viết : (phãi trùng với tên banner) </label>
                         <input class="form-control" type="text" name="title" placeholder="Nhập tên bài viết...">
                         @if($errors->has('title'))
                             <div class="alert alert-danger">{{ $errors->first('title') }}</div>

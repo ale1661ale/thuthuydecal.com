@@ -9,11 +9,11 @@
 
                             @foreach($category as $cate)
                             <li class="mega-menu-position top-hover">
-                                <a href="shop.html">{{ $cate->name }} <i class="ion-chevron-down"></i></a>
+                                <a href="{{ route('collections', $cate->slug) }}">{{ $cate->name }} <i class="ion-chevron-down"></i></a>
                                 <ul class="mega-menu">
                                     @if(count($cate->productType) > 0)
                                         @foreach($cate->productType as $protype)
-                                            <li><a href="#">{{ $protype->name }}</a>
+                                            <li><a href="{{ route('collections.list', $protype->slug, $protype->id) }}">{{ $protype->name }}</a>
                                             </li>
                                         @endforeach
                                     @endif

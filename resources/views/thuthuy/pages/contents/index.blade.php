@@ -44,7 +44,7 @@
                             <input type="checkbox" class="checkbox" value="{{ $value->id }}" name="idContents[]">
                         </td>
 
-                        <td>{{ $key+1 }}</td>
+                        <td>{{ ++$key }}</td>
 
                         <td>
                             {{ $value->title }}

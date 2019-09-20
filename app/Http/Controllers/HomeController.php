@@ -62,13 +62,21 @@ class HomeController extends Controller
             'spmn' => $spmn,
             'spbc' => $spbc,
             'xeMay' => $xeMay,
-            'xeOto' => $xeOto
+            'xeOto' => $xeOto,
             ]);
     }
 
     public function index()
     {
         return view('client.pages.index');
+    }
+
+    public function fetch_data(Request $request)
+    {
+        if ($request->ajax())
+        {
+            return view('client.pages.index')->render;
+        }
     }
 
     public function contact()
@@ -79,6 +87,34 @@ class HomeController extends Controller
     public function aboutUs()
     {
         return view('client.pages.about-us');
+    }
+
+    public function blogPage($slug)
+    {
+        $content = Content::where('slug', $slug)->get();
+
+        return view('client.pages.blog-detail', compact('content'));
+    }
+
+    public function ajaxModal($id)
+    {
+        $product1 = Product::find($id);
+
+        return response()->json($product1, 200);
+    }
+
+    public function collection($slug)
+    {
+        $idCate = Category::where('slug', $slug)->value('id');
+
+        $product = Product::where('id_cate', $idCate)->orderBy('created_at', 'desc')->paginate(15);
+
+        return view('client.pages.shop', compact('product'));
+    }
+
+    public function collectionList()
+    {
+        return view('client.pages.shop-list');
     }
 
 }

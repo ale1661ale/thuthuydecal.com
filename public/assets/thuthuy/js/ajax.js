@@ -745,7 +745,7 @@ $(document).ready(function(){
 			success : function(data)
 			{
 				$('.name').val(data.name);
-				$('.slug').val(data.slug);
+				$('.key_name').val(data.key_name);
 				$('.link').val(data.link);
 				$('.imageThum').attr('title', data.name);
 				$('.description').val(data.description);
