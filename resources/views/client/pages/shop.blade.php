@@ -8,7 +8,7 @@
         <div class="breadcrumb-content">
             <ul>
                 <li><a href="">Trang chủ</a></li>
-                <li class="active">collections</li>
+                <li class="active">{{ $cate[0]->name }}</li>
             </ul>
         </div>
     </div>
@@ -74,7 +74,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="shop-widget mt-40 shop-sidebar-border pt-35">
                         <h4 class="shop-sidebar-title">By Brand</h4>
                         <div class="sidebar-list-style mt-20">
@@ -167,9 +167,9 @@
                             
                             <input type="text" class="sold_out">
 
-                            <button href="#" class="btn btn-primary mt-10" style="height: 38px;background-color: #4a4646;">
+                            <a class="btn btn-primary mt-10 addToCart" style="height: 38px;background-color: #4a4646;">
                                 Thêm giỏ hàng
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>

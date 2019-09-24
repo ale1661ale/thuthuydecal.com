@@ -27,56 +27,67 @@
                     <div class="header-wishlist"></div>
 
                     <div class="header-cart">
-                        <a href="#">
+                        <span href="javascript:;">
                             <div class="header-icon-style">
                                 <i class="icon-handbag icons"></i>
-                                <span class="count-style">02</span>
+                                <span class="count-style">{{ Cart::count() }}</span>
                             </div>
                             <div class="cart-text">
                                 <span class="digit">Giỏ hàng</span>
                             </div>
-                        </a>
+                        </span>
+
                         <div class="shopping-cart-content">
+                        
                             <ul>
+
+                                <?php $cart = Cart::content(); ?>
+                                @foreach($cart as $key => $value)
                                 <li class="single-shopping-cart">
                                     <div class="shopping-cart-img">
-                                        <a href="#"><img alt="" src="assets/client/img/cart/cart-1.jpg">
+                                        <a href="#">
+                                            <img 
+                                                alt="{{ $value->name }}" 
+                                                src="img/upload/product/{{ $value->options->img }}"
+                                                width="100"
+                                                height="72"
+                                            >
                                         </a>
                                     </div>
                                     <div class="shopping-cart-title">
-                                        <h4><a href="#">Phantom Remote </a></h4>
-                                        <h6>Qty: 02</h6>
-                                        <span>$260.00</span>
+                                        <h4><a href="#">{{ $value->name }}</a></h4>
+                                        <h6>{{ $value->qty }}</h6>
+                                        <span>{{ number_format($value->price) }} VNĐ</span>
                                     </div>
                                     <div class="shopping-cart-delete">
-                                        <a href="#"><i class="ion ion-close"></i></a>
-                                    </div>
-                                </li>
-                                <li class="single-shopping-cart">
-                                    <div class="shopping-cart-img">
-                                        <a href="#"><img alt="" src="assets/client/img/cart/cart-2.jpg">
+                                        <a 
+                                            href="javascript:void(0)" 
+                                            data-toggle="modal" 
+                                            class="deleteCart"
+                                            data-target="#deleteCart"
+                                            data-id="{{ $value->rowId }}"
+                                            >
+                                            <i class="ion ion-close"></i>
                                         </a>
                                     </div>
-                                    <div class="shopping-cart-title">
-                                        <h4><a href="#">Phantom Remote</a></h4>
-                                        <h6>Qty: 02</h6>
-                                        <span>$260.00</span>
-                                    </div>
-                                    <div class="shopping-cart-delete">
-                                        <a href="#"><i class="ion ion-close"></i></a>
-                                    </div>
                                 </li>
+                                @endforeach
                             </ul>
+
                             <div class="shopping-cart-total">
                                 <h4>Shipping : <span>$20.00</span></h4>
-                                <h4>Total : <span class="shop-total">$260.00</span></h4>
+                                <h4>Tổng : <span class="shop-total">{{ Cart::total() }} VNĐ</span></h4>
                             </div>
+
                             <div class="shopping-cart-btn">
-                                <a href="cart-page.html">view cart</a>
-                                <a href="checkout.html">checkout</a>
+                                <a href="{{ route('carts.index') }}">Xem chi tiết</a>
+                                <a href="">Thanh toán</a>
                             </div>
+                            
                         </div>
                     </div>
+
+                    
                 </div>
             </div>
         </div>

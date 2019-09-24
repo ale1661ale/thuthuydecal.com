@@ -10,6 +10,7 @@ use File;
 use Merge;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use Cart;
 use App\Http\Requests\CustomerMessageRequest;
 use Illuminate\Http\Request;
 
@@ -27,11 +28,11 @@ class HomeController extends Controller
 
         $productType = Product_Type::where('status',1)->get();
 
-        $product = Product::where('status', 1)->orderBy('created_at', 'desc')->paginate(10);
+        $product = Product::where('status', 1)->orderBy('created_at', 'desc')->take(100)->paginate(10);
 
-        $spnb = Product::where('status', 1)->where('hot', 1)->orderBy('created_at', 'desc')->paginate(10);
+        $spnb = Product::where('status', 1)->where('hot', 1)->orderBy('created_at', 'desc')->take(100)->paginate(10);
 
-        $spmn = Product::where('status', 1)->where('hot', 3)->orderBy('created_at', 'desc')->paginate(10);
+        $spmn = Product::where('status', 1)->where('hot', 3)->orderBy('created_at', 'desc')->take(100)->paginate(10);
 
         $spbc = Product::where('status', 1)
                 ->where('hot', 2)
@@ -53,6 +54,8 @@ class HomeController extends Controller
                 ->inRandomOrder()
                 ->take(10)
                 ->get();
+        
+        $cart = Cart::content();
 
         view()->share([
             'category' => $category, 
@@ -63,6 +66,7 @@ class HomeController extends Controller
             'spbc' => $spbc,
             'xeMay' => $xeMay,
             'xeOto' => $xeOto,
+            'cart' => $cart,
             ]);
     }
 
@@ -105,11 +109,13 @@ class HomeController extends Controller
 
     public function collection($slug)
     {
+        $cate = Category::where('slug', $slug)->get();
+
         $idCate = Category::where('slug', $slug)->value('id');
 
         $product = Product::where('id_cate', $idCate)->orderBy('created_at', 'desc')->paginate(15);
 
-        return view('client.pages.shop', compact('product'));
+        return view('client.pages.shop', compact('product', 'cate'));
     }
 
     public function collectionList()

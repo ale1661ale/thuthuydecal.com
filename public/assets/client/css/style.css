@@ -199,6 +199,17 @@ span.tooltip-content {
     transtion
 ****************************/
 /* ale css */
+.modals {
+    position: fixed;
+    top: 30%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    display: none;
+    overflow: hidden;
+    outline: 0;
+}
 .product-img:hover{
     box-shadow: 0 5px 15px 2px rgba(0, 0, 0, 0.5);
 }
@@ -1727,7 +1738,8 @@ textarea:focus {
 .cart-text > span.digit {
     margin-bottom: 6px;
 }
-.header-cart > a .header-icon-style span {
+.header-cart > a .header-icon-style span,
+.header-cart > span .header-icon-style span {
     background-color: #e02c2b;
     border-radius: 100%;
     color: #fff;

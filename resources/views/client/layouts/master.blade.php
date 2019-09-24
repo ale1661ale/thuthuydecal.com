@@ -47,6 +47,7 @@
     <link rel="stylesheet" href="assets/client/css/ionicons.min.css">
     <link rel="stylesheet" href="assets/client/css/meanmenu.min.css">
     <link rel="stylesheet" href="assets/client/css/style.css">
+    <link rel="stylesheet" href="assets/client/css/toastr.css">
     <link rel="stylesheet" href="assets/client/css/responsive.css">
     <script src="assets/client/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
@@ -85,6 +86,25 @@
     <script src="assets/client/js/plugins.js"></script>
     <script src="assets/client/js/main.js"></script>
     <script src="assets/client/js/ajax.js"></script>
+    <script src="assets/client/js/toastr.min.js"></script>
+
+    @if(Session::has('thongbao'))
+        <script>
+            $(document).ready(function() {
+                toastr.options.timeOut = 3000;
+                toastr.success("{{ Session::get('thongbao') }}")
+            });
+        </script>
+    @endif
+    @if(Session::has('loi'))
+        <script>
+            $(document).ready(function() {
+                toastr.options.timeOut = 3000;
+                toastr.error("{{ Session::get('error') }}")
+            });
+        </script>
+    @endif
+
     <script>
     $('.pull-right .pagination a').unbind('click').on('click', function(e) {
             e.preventDefault();
@@ -111,6 +131,7 @@
         });
         }); // 5 secs
     </script>
+
     <script type="text/javascript">
         var x = document.getElementById("count-ti");
         if($(".count-title")){

@@ -87,6 +87,8 @@ Route::get('blogs/{slug}', 'HomeController@blogPage')->name('blogs');
 Route::get('detail/{id}', 'HomeController@ajaxModal');
 Route::get('collections/{slug}', 'HomeController@collection')->name('collections');
 Route::get('collections/{slug}/list', 'HomeController@collectionList')->name('collections.list');
+Route::resource('carts', 'CartController');
+Route::get('add-to-cart/{id}', 'CartController@addToCart')->name('add_to_cart');
 
 
 

@@ -25,6 +25,8 @@ $(document).ready(function() {
 
                 $('.productImage').attr('src', 'img/upload/product/'+data.image);
 
+                $('.addToCart').attr('href', 'add-to-cart/'+id);
+
                 if (data.sold_out == 1)
                 {
                     $('.sold_out').val('CÒN HÀNG');
@@ -34,6 +36,52 @@ $(document).ready(function() {
                     $('.sold_out').val('HẾT HÀNG');
                 }
             }
+        });
+    });
+
+    $('.qty').blur(function() {
+
+        let rowId = $(this).data('id');
+
+        $.ajax({
+
+            url : 'carts/' +rowId,
+
+            dataType : 'json',
+
+            type : 'put',
+            
+            data : 
+            {
+                qty : $(this).val(),
+            },
+
+            success : function(data)
+            {
+                location.reload();
+            }
+
+        });
+    });
+
+    $('.deleteCart').click(function() {
+        
+        let rowId = $(this).data('id');
+
+        $('.delCart').click(function() {
+            
+            $.ajax({
+
+                url : 'carts/' +rowId,
+                dataType : 'json',
+                type : 'delete',
+                success : function(data)
+                {
+                    toastr.success(data.thongbao, 'Thông báo', {timeOut : 5000});
+                    
+                    location.reload();
+                }
+            });
         });
     });
 

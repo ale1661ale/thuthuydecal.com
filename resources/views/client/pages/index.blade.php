@@ -333,9 +333,9 @@
                             
                             <input type="text" class="sold_out">
 
-                            <button href="#" class="btn btn-primary mt-10" style="height: 38px;background-color: #4a4646;">
+                            <a class="btn btn-primary mt-10 addToCart" style="height: 38px;background-color: #4a4646;">
                                 Thêm giỏ hàng
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
