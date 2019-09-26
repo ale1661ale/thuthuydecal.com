@@ -87,7 +87,7 @@
 
                                 <div class="cart-clear">
                                     <h4 class="grand-totall-title">Tổng cộng  <span>{{ Cart::total() }} VNĐ</span></h4>
-                                    <a href="#">Tiến hàng thanh toán</a>
+                                    <a href="{{ route('checkout') }}">Tiến hàng thanh toán</a>
                                 </div>
 
                             </div>

@@ -4303,6 +4303,21 @@ h5.panel-title span {
     text-transform: uppercase;
     border-radius: 3px;
 }
+button.btn-customer {
+    background-color: #f2f2f2;
+    color: #242424;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1;
+    padding: 16px 62px 17px;
+    text-transform: uppercase;
+    border-radius: 3px;
+}
+button.btn-customer:hover {
+    background-color: #e02c2b;
+    color: #fff;
+}
 .billing-btn > button {
     background-color: #f2f2f2;
     border: medium none;
@@ -4323,6 +4338,7 @@ h5.panel-title span {
     background-color: #e02c2b;
     color: #fff;
 }
+
 .checkout-progress > h4 {
     background-color: #f9f9f9;
     border-bottom: 1px solid #ebebeb;

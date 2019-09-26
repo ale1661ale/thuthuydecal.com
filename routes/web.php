@@ -89,6 +89,8 @@ Route::get('collections/{slug}', 'HomeController@collection')->name('collections
 Route::get('collections/{slug}/list', 'HomeController@collectionList')->name('collections.list');
 Route::resource('carts', 'CartController');
 Route::get('add-to-cart/{id}', 'CartController@addToCart')->name('add_to_cart');
+Route::get('checkout', 'CartController@checkout')->name('checkout');
+Route::resource('orders', 'OrderController');
 
 
 

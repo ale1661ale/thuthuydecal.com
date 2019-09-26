@@ -62,6 +62,17 @@
             </ul>
         </li><!-- nav-item -->
 
+        <li class="nav-item">
+            <a href="" class="nav-link with-sub">
+                <i class="ionicons ion-beer"></i>
+                <span>Bán hàng</span>
+            </a>
+            <ul class="nav-sub">
+                <li class="nav-item"><a href="{{ route('image-types.index') }}" class="nav-link">Thể loại ảnh</a></li>
+                <li class="nav-item"><a href="{{ route('ales.index') }}" class="nav-link">Thông tin trong website</a></li>
+            </ul>
+        </li><!-- nav-item -->
+
     </ul>
 
 </div><!-- kt-sideleft -->

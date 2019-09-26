@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Ale, Banner, Category, Content_Type, Content, Image_Type, Introduce, Logo, Product_Type, Product, Slide, User, CustomerMessage};
+use App\Models\{Ale, Banner, Category, Content_Type, Content, Image_Type, Introduce, Logo, Product_Type, Product, Slide, User, CustomerMessage, Customer};
 use Illuminate\Support\Str;
 use Validator;
 use File;
@@ -121,7 +121,7 @@ class CartController extends Controller
     {
         $product = Product::find($id);
 
-        if ($reproductquest->quantity)
+        if ($product->quantity)
         {
             $quantity = $product->quantity;
         }
@@ -151,5 +151,14 @@ class CartController extends Controller
         Cart::add($cart);
 
         return back()->with('thongbao', 'Đã thêm vào giỏ hàng của bạn .');
+    }
+
+    public function checkout()
+    {
+        $checkout = Customer::all();
+
+        $price = Cart::total();
+
+        return view('client.pages.checkout', compact('price', 'checkout'));
     }
 }
